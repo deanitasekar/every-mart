@@ -1,6 +1,8 @@
 # Every Mart
 ### <b>🛒 Toko Online Serba Ada untuk Semua Kebutuhan Anda 🛒</b>
-###### Deanita Sekar Kinasih | 2306229405 | PBP-D
+###### Nama: Deanita Sekar Kinasih
+###### NPM: 2306229405
+###### Kelas: PBP-D
 ##### http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
 
 ## Tugas 2: Implementasi Model-View-Template (MVT) pada Django
@@ -150,19 +152,19 @@ git push pws main:master
 - views melakukan display data ke template dan template mengembalikan data input ke views
 - Setelah semua Request terpenuhi, views akan mengembalikan ke Internet dan Internet akan mengembalikan ke Client dalam bentuk Web Page
 ###### Keterkaitan antara urls.py, views.py, models.py, dan berkas html
-'urls.py' bergungsi sebagai peta dalam web aplikasi dan menghubungkan pola URL sesuai dengan 'views.py'. 'views.py' menganai HTTP Request dan mengembalikan respons, serta berinteraksi dengan 'models.py' untuk memodifikasi data. 'models.py' akan menyediakan abstraksi untuk interaksi dengan database. 'berkas html' akan menentukan bagaimana data dari 'views.py' ditampilkan kepada Client
+'urls.py' berfungsi sebagai peta dalam web aplikasi dan menghubungkan pola URL sesuai dengan 'views.py'. 'views.py' menangani HTTP Request dan mengembalikan respons, serta berinteraksi dengan 'models.py' untuk memodifikasi data. 'models.py' akan menyediakan abstraksi untuk interaksi dengan database. 'berkas html' akan menentukan bagaimana data dari 'views.py' ditampilkan kepada Client
 
 ### Jelaskan fungsi git dalam pengembangan perangkat lunak!
-Git adalah alat software development yang memiliki fungsi sebagai version control sistem untuk melacak dan mengelola source code secara efisien. Dalam pengembangan perangkat lunak, Git memiliki beberapa peranan penting, yaitu:
-- Git membantu melacak perubahan kode dengan informasi lengkap tentang apa yang diubah, siapa yang melakukan perubaham, dan kapan dilakukan perubahan
+Git adalah alat software development yang memiliki fungsi sebagai version control system untuk melacak dan mengelola source code secara efisien. Dalam pengembangan perangkat lunak, Git memiliki beberapa peranan penting, yaitu:
+- Git membantu pelacakan perubahan kode dengan informasi lengkap tentang apa yang diubah, siapa yang melakukan perubaham, dan kapan dilakukan perubahan
 - Git memudahkan dalam melakukan branching karena dapat membuat branch baru untuk keperluan pengembangan perangkat lunak dan branch tersebut dapat di-merge apabila diperlukan
 - Git menyimpan riwayat perubahan kode pada setiap commit yang dilakukan sehingga dimungkinkan untuk kembali ke versi sebelumnya apabila diperlukan
-- Git menyediakan berbagai fitur yang dapat memudahkan kolaborasi antar developer dalam waktu yang bersamaan untuk mempermudah pengembangan perangkat lunak dengan banyak developer
+- Git menyediakan berbagai fitur yang dapat memudahkan kolaborasi dalam waktu yang bersamaan untuk mempermudah pengembangan perangkat lunak dengan banyak developer
 
 ### Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
 Menurut saya, framework Django sebagai permulaan pembelajaran pengembangan perangkat lunak menawarkan kombinasi unik yang jarang ditemui pada framework lain. Penggunaan bahasa pemrograman Python memberi kemudahan karena sintaksnya bersih sehingga developer dapat mempelajari pengembangan perangkat lunak tanpa terjebak dalam sintaks yang rumit. 
 Framework Django memiliki arsitektur MVT (Model-View-Template) menghadirkan struktur yang logis dan intuitif untuk memahami alur pengembangan perangkat lunak. Selain itu, adanya ORM (Object-Relational Mapping) dapat membuat interaksi dengan database menjadi lebih mudah karena developer tidak perlu menulis kode SQL secara langsung. Tidak terbatas di situ saja, framework ini memiliki keunggulan dengan keamanan yang terintegrasi secara default. 
-Berdasarkan pengamatan saya selama beberapa minggu perkuliahan PBP, saya meyakini bahwa framework dapat menjadi framework yang paling cocok untuk memulai pembelajaran dalam pengembangan perangkat lunak dan memiliki potensi besar untuk pengembangan perangkat lunak lanjutan. 
+Berdasarkan pengamatan saya selama beberapa minggu perkuliahan PBP, saya meyakini bahwa framework Django dapat menjadi framework yang paling cocok untuk memulai pembelajaran dalam pengembangan perangkat lunak dan memiliki potensi besar untuk pengembangan perangkat lunak lanjutan. 
 
 ### Mengapa model pada Django disebut sebagai ORM?
-Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena perannya sebagai jembatan penghubung antara objek dalam Python dengan database relasional. ORM Django memungkinkan developer untuk mendefinisikan struktur data dan relasi menggunakan Python yang secara otomatis diterjemahkan ke dalam skema database dan operasi SQL yang sesuai. Mekanisme ini memudahkan developer untuk berinteraksi dengan databse menggunakan Python tanpa perlu menulis query SQL kompleks secara langsung. ORM yang dimiliki oleh Django membantu developer untuk berfokus pada pengembangan perangkat lunak daripada implementasi databse. 
+Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena perannya sebagai jembatan penghubung antara objek dalam Python dengan database relasional. ORM Django memungkinkan developer untuk mendefinisikan struktur data dan relasi menggunakan Python yang secara otomatis diterjemahkan ke dalam skema database dan operasi SQL yang sesuai. Mekanisme ini memudahkan developer untuk berinteraksi dengan databse menggunakan Python tanpa perlu menulis query SQL kompleks secara langsung. ORM yang dimiliki oleh Django membantu developer untuk berfokus pada pengembangan perangkat lunak daripada implementasi database.
