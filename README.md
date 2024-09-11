@@ -141,15 +141,15 @@ git push pws main:master
 ```
 
 ### Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html
-<b> Bagan </b>
+###### Bagan
 ![Bagan](/diagram.png)
-<b> Alur </b>
+###### Alur
 - Client dapat melaukan request, Internet akan melanjutkan HTTP request dan urls akan melanjutkan Route Request. views akan melanjutkan ke models dan template
 - views melakukan display data ke template dan template mengembalikan data input ke views
 - views akan melakukan modifikasi data ke models dan models akan mengakses database untuk melakukan modifikasi. Request akan dikembalikan ke models dan data akan dikembalikan ke views
 - views melakukan display data ke template dan template mengembalikan data input ke views
 - Setelah semua Request terpenuhi, views akan mengembalikan ke Internet dan Internet akan mengembalikan ke Client dalam bentuk Web Page
-<b> Keterkaitan antara urls.py, views.py, models.py, dan berkas html </b>
+###### Keterkaitan antara urls.py, views.py, models.py, dan berkas html
 'urls.py' bergungsi sebagai peta dalam web aplikasi dan menghubungkan pola URL sesuai dengan 'views.py'. 'views.py' menganai HTTP Request dan mengembalikan respons, serta berinteraksi dengan 'models.py' untuk memodifikasi data. 'models.py' akan menyediakan abstraksi untuk interaksi dengan database. 'berkas html' akan menentukan bagaimana data dari 'views.py' ditampilkan kepada Client
 
 ### Jelaskan fungsi git dalam pengembangan perangkat lunak!
