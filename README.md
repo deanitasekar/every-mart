@@ -141,6 +141,8 @@ git push pws main:master
 ```
 
 ### Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html
+<b> Bagan </b>
+![Bagan](/diagram.png)
 <b> Alur </b>
 - Client dapat melaukan request, Internet akan melanjutkan HTTP request dan urls akan melanjutkan Route Request. views akan melanjutkan ke models dan template
 - views melakukan display data ke template dan template mengembalikan data input ke views
