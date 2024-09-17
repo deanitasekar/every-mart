@@ -3,7 +3,9 @@
 ###### Nama: Deanita Sekar Kinasih
 ###### NPM: 2306229405
 ###### Kelas: PBP-D
-##### http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
+###### Link: http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
+
+## Tugas 3: Implementasi Form dan Data Delivery pada Django
 
 ## Tugas 2: Implementasi Model-View-Template (MVT) pada Django
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
