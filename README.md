@@ -30,7 +30,7 @@ Dengan demikian, method 'is_valid()' diperlukan untuk menjaga keamanan dan konsi
 <hr>
 
 ### Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
-'csrf_token' diperlukan saat membuat form di Django sebagai perlindungan dari serangan Cross-Site Request Forgery (CSRF). Tanpa adanya 'csrf_token' pada form, platform menjadi rentan terhadap eksploitasi dimana penyerang dapat membuat 'request' dengan mudah tanpa sepengetahuan pengguna karena 'request' tidak dicek terlebih dahulu. Mekanisme'csrf_token' melibatkan penyisipan token unik ke dalam form HTML, yang akan diverifikasi saat 'request' diterima. Token unik ini tidak dapat diketahui oleh penyerang sehingga menyulitkan penyerang untuk melakukan 'request' tanpa sepengetahuan pengguna. Sehingga, 'csrf_token' sangat krusial untuk menjaga integritas dan keamanan platform agar terhindar dari CSRF. 
+`csrf_token` diperlukan saat membuat form di Django sebagai perlindungan dari serangan Cross-Site Request Forgery (CSRF). Tanpa adanya `csrf_token` pada form, platform menjadi rentan terhadap eksploitasi dimana penyerang dapat membuat `request` dengan mudah tanpa sepengetahuan pengguna karena tidak dilakukan pengecekan `request` terlebih dahulu. Mekanisme `csrf_token` melibatkan penyisipan token unik ke dalam form HTML, yang akan diverifikasi saat `request` diterima. Token unik ini tidak dapat diketahui oleh penyerang sehingga menyulitkan penyerang untuk melakukan `request` tanpa sepengetahuan pengguna. Dengan demikian, `csrf_token` sangat krusial untuk menjaga integritas dan keamanan platform agar terhindar dari CSRF. 
 <hr>
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
@@ -54,7 +54,7 @@ class Product(models.Model) :
 python manage.py makemigrations
 python manage.py migrate
 ```
-- Membuat 'forms.py' dalam 'main' untuk menerima Product Entry Form baru
+- Membuat `forms.py` dalam `main` untuk menerima Product Entry Form baru
 ```py
 from django.forms import ModelForm
 from main.models import Product
@@ -64,11 +64,11 @@ class ProductEntryForm(ModelForm):
         model = Product
         fields = ["name", "price", "description", "stock"]
 ```
-- Melakukan modifikasi dengan menambahkan import pada 'views.py' dalam 'main'
+- Melakukan modifikasi dengan menambahkan import pada `views.py` dalam `main`
 ```py
 from django.shortcuts import render, redirect
 ```
-- Melakukan modifikasi pada 'views.py' dalam 'main' dengan menambahkan fungsi 'create_product' untuk menghasilkan form yang dapat menambahkan Product Entry secara otomatis
+- Melakukan modifikasi pada `views.py` dalam `main` dengan menambahkan fungsi `create_product` untuk menghasilkan form yang dapat menambahkan Product Entry secara otomatis
 ```py
 def create_product(request):
     form = ProductEntryForm(request.POST or None)
@@ -80,7 +80,7 @@ def create_product(request):
     context = {'form': form}
     return render(request, "create_product.html", context)
 ```
-- Melakukan modifikasi pada 'views.py' dalam 'main' dengan mengubah fungsi 'show_main'
+- Melakukan modifikasi pada `views.py` dalam `main` dengan mengubah fungsi `show_main`
 ```py
 def show_main(request):
     products = Product.objects.all()
@@ -93,7 +93,7 @@ def show_main(request):
 
     return render(request, "main.html", context)
 ```
-- Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL
+- Melakukan modifikasi pada `urls.py` dalam `main` dengan menambahkan import dan menambahkan path URL
 ```py
 from main.views import show_main
 ```
@@ -125,7 +125,7 @@ from main.views import show_main
 ```
 python manage.py runserver
 ```
-- Melakukan modifikasi 'main.html' dalam 'main/templates' untuk menampilkan data dalam bentuk table serta tombol 'Add Product'
+- Melakukan modifikasi `main.html` dalam `main/templates` untuk menampilkan data dalam bentuk table serta tombol `Add New Product`
 ```py
 {% if not products %}
 <p>Belum ada product yang terdaftar!</p>
@@ -157,7 +157,7 @@ python manage.py runserver
   <button>Add New Product</button>
 </a>
 ```
-- Melakukan modifikasi pada 'views.py' dalam 'main' dengan menambahkan import dan menambahkan fungsi 'show_xml' untuk mengembalikan data dalam bentuk XML
+- Melakukan modifikasi pada `views.py` dalam `main` dengan menambahkan import dan menambahkan fungsi `show_xml` untuk mengembalikan data dalam bentuk XML
 ``` py
 from django.http import HttpResponse
 from django.core import serializers
@@ -167,27 +167,27 @@ def show_xml(request):
     data = Product.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 ```
-- Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL untuk konfigurasi routing URL
+- Melakukan modifikasi pada `urls.py` dalam `main` dengan menambahkan import dan menambahkan path URL untuk konfigurasi routing URL
 ```py
 from main.views import show_main, create_mood_entry, show_xml
 ```
 ```py
     path('xml/', show_xml, name='show_xml'),
 ```
-- Melakukan modifikasi pada 'views.py' dalam 'main' dengan menambahkan fungsi 'show_json' untuk mengembalikan data dalam bentuk JSON
+- Melakukan modifikasi pada `views.py` dalam `main` dengan menambahkan fungsi `show_json` untuk mengembalikan data dalam bentuk JSON
 ```py
 def show_json(request):
     data = Product.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 ```
-- Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL untuk konfigurasi routing URL
+- Melakukan modifikasi pada `urls.py` dalam `main` dengan menambahkan import dan menambahkan path URL untuk konfigurasi routing URL
 ```py
 from main.views import show_main, create_mood_entry, show_xml, show_json
 ```
 ```py
     path('json/', show_json, name='show_json'),
 ```
-- Melakukan modifikasi pada 'views.py' dalam 'main' dengan menambahkan fungsi 'show_xml_by_id' dan 'show_json_by_id' untuk menerima parameter 'request' dan 'id' untuk mengembalikan data berdasarkan ID dalam bentuk XML dan JSON
+- Melakukan modifikasi pada `views.py` dalam `main` dengan menambahkan fungsi `show_xml_by_id` dan `show_json_by_id` untuk menerima parameter `request` dan `id` untuk mengembalikan data berdasarkan ID dalam bentuk XML dan JSON
 ```py
 def show_xml_by_id(request, id):
     data = MoodEntry.objects.filter(pk=id)
@@ -197,7 +197,7 @@ def show_json_by_id(request, id):
     data = MoodEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 ```
-- Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL untuk konfigurasi routing URL
+- Melakukan modifikasi pada `urls.py` dalam `main` dengan menambahkan import dan menambahkan path URL untuk konfigurasi routing URL
 ```py
 from main.views import show_main, create_mood_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
 ```
@@ -237,7 +237,7 @@ git push pws main:master
 
 ## Tugas 2: Implementasi Model-View-Template (MVT) pada Django
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
-- Membuat direktori lokal bernama 'every-mart' dan masuk ke direktori tersebut melalui terminal
+- Membuat direktori lokal bernama `every-mart` dan masuk ke direktori tersebut melalui terminal
 ```
 cd <path_direktori>\every-mart
 ```
@@ -247,7 +247,7 @@ cd <path_direktori>\every-mart
 git config --global user.name "<NAME>"
 git config --global user.email "<EMAIL>"
 ```
-- Membuat repositori GitHub dengan nama 'every-mart' dan menghubungkan dengan direktori lokal
+- Membuat repositori GitHub dengan nama `every-mart` dan menghubungkan dengan direktori lokal
 ```
 git branch -M main
 git remote add origin https://github.com/deanitasekar/every-mart.git
@@ -257,23 +257,23 @@ git remote add origin https://github.com/deanitasekar/every-mart.git
 python -m venv env
 env\Scripts\activate
 ```
-- Menyiapkan dependencies dengan membuat berkas 'requirements.txt' dan melakukan instalansi dependencies
+- Menyiapkan dependencies dengan membuat berkas `requirements.txt` dan melakukan instalansi dependencies
 ```
 pip install -r requirements.txt
 ```
-- Membuat proyek Django bernama 'every_mart'
+- Membuat proyek Django bernama `every_mart`
 ```
 django-admin startproject every_mart .
 ```
-- Melakukan modifikasi pada 'ALLOWED_HOTS' di 'settings.py' untuk deployment dan menjalankan server Django
+- Melakukan modifikasi pada `ALLOWED_HOTS` di `settings.py` untuk deployment dan menjalankan server Django
 ```
 python manage.py runserver
 ```
-- Membuat aplikasi bernama 'main' dalam proyek dan melakukan modifikasi pada 'INSTALLED_APPS' di 'settings.py' dalam direktori
+- Membuat aplikasi bernama `main` dalam proyek dan melakukan modifikasi pada `INSTALLED_APPS` di `settings.py` dalam direktori
 ```
 python manage.py startapp main
 ```
-- Membuat 'main.html' dan mengisi sesuai dengan kode yang diharapkan
+- Membuat `main.html` dan mengisi sesuai dengan kode yang diharapkan
 ```py
 <!DOCTYPE html>
 <html lang="id">
@@ -311,7 +311,7 @@ class Product(models.Model) :
 python manage.py makemigrations
 python manage.py migrate
 ```
-● Mengintegrasikan komoponen MVT dengan melakukan modifikasi 'views.py' dalam direktori aplikasi 'main'
+● Mengintegrasikan komoponen MVT dengan melakukan modifikasi `views.py` dalam direktori aplikasi `main`
 ```py
 from django.shortcuts import render
 
@@ -324,7 +324,7 @@ def show_main(request):
 
     return render(request, "main.html", context)
 ```
-- Mengonfigurasi routing URL aplikasi 'main' dengan membuat berkas 'urls.py'
+- Mengonfigurasi routing URL aplikasi `main` dengan membuat berkas `urls.py`
 ```py
 from django.urls import path
 from main.views import show_main
@@ -335,7 +335,7 @@ urlpatterns = [
     path('', show_main, name='show_main'),
 ]
 ```
-- Mengonfigurasi routing URL proyek dengan melakukan modifikasi urls.py dalam direktore'every_mart'
+- Mengonfigurasi routing URL proyek dengan melakukan modifikasi `urls.py` dalam direktori `every_mart`
 ```py
 ...
 from django.urls import path, include
@@ -351,14 +351,14 @@ urlpatterns = [
 ```
 python manage.py runserver
 ```
-- Menambahkan berkas '.gitignore' dan mengunggah proyek ke repositori Github 'every-mart'
+- Menambahkan berkas `.gitignore` dan mengunggah proyek ke repositori Github `every-mart`
 ```
 git add .
 git commit -m "..."
 git push origin main
 ```
-- Mengakses halaman PWS pada https://pbp.cs.ui.ac.id.dan membuat proyek baru dengan nama 'everymart'
-- Melakukan modifikasi 'settings.py' pada 'ALLOWED_HOSTS' untuk menghubungkan dengan URL deplotment PWS
+- Mengakses halaman PWS pada https://pbp.cs.ui.ac.id.dan membuat proyek baru dengan nama `everymart`
+- Melakukan modifikasi `settings.py` pada `ALLOWED_HOSTS` untuk menghubungkan dengan URL deployment PWS
 ```py
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "deanita-sekar-everymart.pbp.cs.ui.ac.id"]
 ```
@@ -383,7 +383,7 @@ git push pws main:master
 - views melakukan display data ke template dan template mengembalikan data input ke views
 - Setelah semua Request terpenuhi, views akan mengembalikan ke Internet dan Internet akan mengembalikan ke Client dalam bentuk Web Page
 ###### Keterkaitan antara urls.py, views.py, models.py, dan berkas html
-'urls.py' berfungsi sebagai peta dalam web aplikasi dan menghubungkan pola URL sesuai dengan 'views.py'. 'views.py' menangani HTTP Request dan mengembalikan respons, serta berinteraksi dengan 'models.py' untuk memodifikasi data. 'models.py' akan menyediakan abstraksi untuk interaksi dengan database. 'berkas html' akan menentukan bagaimana data dari 'views.py' ditampilkan kepada Client
+`urls.py` berfungsi sebagai peta dalam web aplikasi dan menghubungkan pola URL sesuai dengan `views.py`. `views.py` menangani HTTP Request dan mengembalikan respons, serta berinteraksi dengan `models.py` untuk memodifikasi data. `models.py` akan menyediakan abstraksi untuk interaksi dengan database. `berkas html` akan menentukan bagaimana data dari `views.py` ditampilkan kepada Client.
 <hr>
 
 ### Jelaskan fungsi git dalam pengembangan perangkat lunak!
@@ -397,9 +397,9 @@ Git adalah alat software development yang memiliki fungsi sebagai version contro
 ### Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
 Menurut saya, framework Django sebagai permulaan pembelajaran pengembangan perangkat lunak menawarkan kombinasi unik yang jarang ditemui pada framework lain. Penggunaan bahasa pemrograman Python memberi kemudahan karena sintaksnya bersih sehingga developer dapat mempelajari pengembangan perangkat lunak tanpa terjebak dalam sintaks yang rumit. 
 Framework Django memiliki arsitektur MVT (Model-View-Template) menghadirkan struktur yang logis dan intuitif untuk memahami alur pengembangan perangkat lunak. Selain itu, adanya ORM (Object-Relational Mapping) dapat membuat interaksi dengan database menjadi lebih mudah karena developer tidak perlu menulis kode SQL secara langsung. Tidak terbatas di situ saja, framework ini memiliki keunggulan dengan keamanan yang terintegrasi secara default. 
-Berdasarkan pengamatan saya selama beberapa minggu perkuliahan PBP, saya meyakini bahwa framework Django dapat menjadi framework yang paling cocok untuk memulai pembelajaran dalam pengembangan perangkat lunak dan memiliki potensi besar untuk pengembangan perangkat lunak lanjutan
+Berdasarkan pengamatan saya selama beberapa minggu perkuliahan PBP, saya meyakini bahwa framework Django dapat menjadi framework yang paling cocok untuk memulai pembelajaran dalam pengembangan perangkat lunak dan memiliki potensi besar untuk pengembangan perangkat lunak lanjutan.
 <hr>
 
 ### Mengapa model pada Django disebut sebagai ORM?
-Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena perannya sebagai jembatan penghubung antara objek dalam Python dengan database relasional. ORM Django memungkinkan developer untuk mendefinisikan struktur data dan relasi menggunakan Python yang secara otomatis diterjemahkan ke dalam skema database dan operasi SQL yang sesuai. Mekanisme ini memudahkan developer untuk berinteraksi dengan databse menggunakan Python tanpa perlu menulis query SQL kompleks secara langsung. ORM yang dimiliki oleh Django membantu developer untuk berfokus pada pengembangan perangkat lunak daripada implementasi database
+Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena perannya sebagai jembatan penghubung antara objek dalam Python dengan database relasional. ORM Django memungkinkan developer untuk mendefinisikan struktur data dan relasi menggunakan Python yang secara otomatis diterjemahkan ke dalam skema database dan operasi SQL yang sesuai. Mekanisme ini memudahkan developer untuk berinteraksi dengan databse menggunakan Python tanpa perlu menulis query SQL kompleks secara langsung. ORM yang dimiliki oleh Django membantu developer untuk berfokus pada pengembangan perangkat lunak daripada implementasi database.
 <hr>
