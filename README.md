@@ -1,7 +1,9 @@
 # Every Mart
 ### <b>🛒 Toko Online Serba Ada untuk Semua Kebutuhan Anda 🛒</b>
 <b> Nama: Deanita Sekar Kinasih </b>
+
 <b> NPM: 2306229405 </b>
+
 <b> Kelas: PBP-D </b>
 ###### http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
 
