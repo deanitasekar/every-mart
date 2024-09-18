@@ -160,7 +160,7 @@ def show_xml(request):
     data = Product.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 ```
-● Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL
+● Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL untuk routing URL
 ```py
 from main.views import show_main, create_mood_entry, show_xml
 ```
@@ -173,7 +173,7 @@ def show_json(request):
     data = Product.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 ```
-● Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL
+● Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL untuk routing URL
 ```py
 from main.views import show_main, create_mood_entry, show_xml, show_json
 ```
@@ -190,7 +190,7 @@ def show_json_by_id(request, id):
     data = MoodEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 ```
-● Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL
+● Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL untuk routing URL
 ```py
 from main.views import show_main, create_mood_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
 ```
