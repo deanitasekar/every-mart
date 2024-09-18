@@ -6,6 +6,193 @@
 ###### Link: http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
 
 ## Tugas 3: Implementasi Form dan Data Delivery pada Django
+### Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+
+
+### Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+
+### Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+
+### Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+● Mengubah primary key dari integer menjadi UUID untuk best practice dari sisi keamanan aplikasi dengan melakukan modifikasi 'models.py'
+```py
+import uuid # modifikasi
+from django.db import models
+
+class Product(models.Model) :
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) # modifikasi
+    name = models.CharField(max_length=255)
+    price = models.IntegerField()
+    description = models.TextField()
+    stock = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+```
+● Melakukan migrasi model melalui terminal
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+● Membuat 'forms.py' dalam 'main' untuk menerima Product Entry Form baru
+```py
+from django.forms import ModelForm
+from main.models import Product
+
+class ProductEntryForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ["name", "price", "description", "stock"]
+```
+● Melakukan modifikasi dengan menambahkan import pada 'views.py' dalam 'main'
+```py
+from django.shortcuts import render, redirect
+```
+● Melakukan modifikasi pada 'views.py' dalam 'main' dengan menambahkan fungsi 'create_product' untuk menghasilkan form yang dapat menambahkan Product Entry secara otomatis
+```py
+def create_product(request):
+    form = ProductEntryForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return redirect('main:show_main')
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+```
+● Melakukan modifikasi pada 'views.py' dalam 'main' dengan mengubah fungsi 'show_main'
+```py
+def show_main(request):
+    products = Product.objects.all()
+    context = {
+        'npm' : '2306229405',
+        'name': 'Deanita Sekar Kinasih',
+        'class': 'PBP D',
+        'products' : products,
+    }
+
+    return render(request, "main.html", context)
+```
+● Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL
+```py
+from main.views import show_main
+```
+```py
+    path('create-product', create_product, name='create_product'),
+```
+● Membuat 'create_product.html' dalam 'main/templates'
+```py
+{% extends 'base.html' %} 
+{% block content %}
+<h1>Add Product</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+    <tr>
+      <td></td>
+      <td>
+        <input type="submit" value="Add Product" />
+      </td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}
+```
+● Menjalankan proyek Django melalui terminal untuk mengecek fungsionalitas
+```
+python manage.py runserver
+```
+● Melakukan modifikasi 'main.html' dalam 'main/templates' untuk menampilkan data dalam bentuk table serta tombol 'Add Product'
+```py
+{% if not products %}
+<p>Belum ada product yang terdaftar!</p>
+{% else %}
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Description</th>
+    <th>Stock</th>
+  </tr>
+
+  {% comment %} Berikut cara memperlihatkan data product di bawah baris ini 
+  {% endcomment %} 
+  {% for product in products %}
+  <tr>
+    <td>{{product.name}}</td>
+    <td>{{product.price}}</td>
+    <td>{{product.description}}</td>
+    <td>{{product.stock}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_product' %}">
+  <button>Add New Product</button>
+</a>
+```
+● Melakukan modifikasi pada 'views.py' dalam 'main' dengan menambahkan import dan menambahkan fungsi 'show_xml' untuk mengembalikan data dalam bentuk XML
+``` py
+from django.http import HttpResponse
+from django.core import serializers
+```
+``` py
+def show_xml(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+```
+● Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL
+```py
+from main.views import show_main, create_mood_entry, show_xml
+```
+```py
+    path('xml/', show_xml, name='show_xml'),
+```
+● Melakukan modifikasi pada 'views.py' dalam 'main' dengan menambahkan fungsi 'show_json' untuk mengembalikan data dalam bentuk JSON
+```py
+def show_json(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+● Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL
+```py
+from main.views import show_main, create_mood_entry, show_xml, show_json
+```
+```py
+    path('json/', show_json, name='show_json'),
+```
+● Melakukan modifikasi pada 'views.py' dalam 'main' dengan menambahkan fungsi 'show_xml_by_id' dan 'show_json_by_id' untuk menerima parameter 'request' dan 'id' untuk mengembalikan data berdasarkan ID dalam bentuk XML dan JSON
+```py
+def show_xml_by_id(request, id):
+    data = MoodEntry.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json_by_id(request, id):
+    data = MoodEntry.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+● Melakukan modifikasi pada 'urls.py' dalam 'main' dengan menambahkan import dan menambahkan path URL
+```py
+from main.views import show_main, create_mood_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
+```
+```py
+    path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+```
+● Menjalankan proyek Django melalui terminal untuk mengecek fungsionalitas dan menggunakan Postman sebagai Data Viewer
+```
+python manage.py runserver
+```
+
+### Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman
 
 ## Tugas 2: Implementasi Model-View-Template (MVT) pada Django
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
@@ -46,7 +233,7 @@ python manage.py runserver
 python manage.py startapp main
 ```
 ● Membuat 'main.html' dan mengisi sesuai dengan kode yang diharapkan
-```
+```py
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -66,7 +253,7 @@ python manage.py startapp main
 </html>
 ```
 ● Melakukan modifikasi 'models.py' dalam direktori aplikasi 'main'
-```
+```py
 from django.db import models
 
 class Product(models.Model) :
@@ -84,7 +271,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 ● Mengintegrasikan komoponen MVT dengan melakukan modifikasi 'views.py' dalam direktori aplikasi 'main'
-```
+```py
 from django.shortcuts import render
 
 def show_main(request):
@@ -97,7 +284,7 @@ def show_main(request):
     return render(request, "main.html", context)
 ```
 ● Mengonfigurasi routing URL aplikasi 'main' dengan membuat berkas 'urls.py'
-```
+```py
 from django.urls import path
 from main.views import show_main
 
@@ -108,7 +295,7 @@ urlpatterns = [
 ]
 ```
 ● Mengonfigurasi routing URL proyek dengan melakukan modifikasi urls.py dalam direktore'every_mart'
-```
+```py
 ...
 from django.urls import path, include
 ...
@@ -131,7 +318,7 @@ git push origin main
 ```
 ● Mengakses halaman PWS pada https://pbp.cs.ui.ac.id.dan membuat proyek baru dengan nama 'everymart'
 ● Melakukan modifikasi 'settings.py' pada 'ALLOWED_HOSTS' untuk menghubungkan dengan URL deplotment PWS
-```
+```py
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "deanita-sekar-everymart.pbp.cs.ui.ac.id"]
 ```
 ● Mengunggah perubahan pada repositori GituHub dan melakukan push ke PWS
