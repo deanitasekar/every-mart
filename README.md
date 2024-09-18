@@ -211,7 +211,7 @@ from main.views import show_main, create_mood_entry, show_xml, show_json, show_x
 ```
 python manage.py runserver
 ```
-- Mengunggah perubahan pada repositori GituHub dan melakukan push ke PWS
+- Mengunggah perubahan pada repositori GitHub dan melakukan push ke PWS
 ```
 git add .
 git commit -m "..."
@@ -364,7 +364,7 @@ git push origin main
 ```py
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "deanita-sekar-everymart.pbp.cs.ui.ac.id"]
 ```
-- Mengunggah perubahan pada repositori GituHub dan melakukan push ke PWS
+- Mengunggah perubahan pada repositori GitHub dan melakukan push ke PWS
 ```
 git add .
 git commit -m "..."
