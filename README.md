@@ -7,9 +7,13 @@
 <b> Kelas: PBP-D </b>
 ###### http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
 
+<details>
+<summary> Tugas 3: Implementasi Form dan Data Delivery pada Django </summary>
+
 ## Tugas 3: Implementasi Form dan Data Delivery pada Django
 ### Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 Data delivery memungkinkan pertukaran informasi yang akurat dan efisien antara user, sistem, dan perangkat. Hal ini menjamin integritas data, meningkatkan kecepatan transfer dan mengoptimalkan penggunaan sumber daya platform. Mekanisme data delivery mendukung terjadinya pertukaran informasi secara mulus antara berbagai komponen, terutama antara front-end dan back-end. Dengan data delivery, sebuah platform dapat berfungsi secara optimal karena informasi yang masuk dapat dikelola dengan baik.
+<hr>
 
 ### Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 Menurut saya, JSON lebih baik dari XML dengan beberapa alasan, yaitu:
@@ -18,13 +22,16 @@ Menurut saya, JSON lebih baik dari XML dengan beberapa alasan, yaitu:
 3. JSON memiliki readibility yang tinggi sehingga mudah dibaca dan dipahami oleh pengguna
 4. JSON mendukung beberapa tipe data seperti string, object, dan array
 Dapat disimpulkan bahwa JSON lebih populer dibandingkan XML karena efisiensi yang ditawarkannya. Struktur data JSON yang sederhana tetapi memiliki banyak keunggulan membuat JSON menjadi pilihan utama dalam pengembangan platform. 
+<hr>
 
 ### Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
 Method 'is_valid()' memiliki peranan penting untuk melakukan validasi data yang pengguna masukkan pada form. Apabila data yang dimasukkan pengguna tidak sesuai, method ini akan mengembalikan nilai 'False'. Sedangkan, apabila data yang dimasukkan pengguna sesuai, method ini akan mengembalikan nilai 'True' dan input data akan diproses di dalam 'Product Entry Form' yang akan mengarah ke 'models'. 
 Dengan demikian, method 'is_valid()' diperlukan untuk menjaga keamanan dan konsistensi data. Hal ini juga akan mempermudah dalam proses pemeliharaan yang dilakukan oleh para pengembang platform.
+<hr>
 
 ### Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
 'csrf_token' diperlukan saat membuat form di Django sebagai perlindungan dari serangan Cross-Site Request Forgery (CSRF). Tanpa adanya 'csrf_token' pada form, platform menjadi rentan terhadap eksploitasi dimana penyerang dapat membuat 'request' dengan mudah tanpa sepengetahuan pengguna karena 'request' tidak dicek terlebih dahulu. Mekanisme'csrf_token' melibatkan penyisipan token unik ke dalam form HTML, yang akan diverifikasi saat 'request' diterima. Token unik ini tidak dapat diketahui oleh penyerang sehingga menyulitkan penyerang untuk melakukan 'request' tanpa sepengetahuan pengguna. Sehingga, 'csrf_token' sangat krusial untuk menjaga integritas dan keamanan platform agar terhindar dari CSRF. 
+<hr>
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 ● Mengubah primary key dari integer menjadi UUID untuk best practice dari sisi keamanan aplikasi dengan melakukan modifikasi 'models.py'
@@ -202,6 +209,7 @@ from main.views import show_main, create_mood_entry, show_xml, show_json, show_x
 ```
 python manage.py runserver
 ```
+<hr>
 
 ### Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman
 ###### XML
@@ -212,9 +220,13 @@ python manage.py runserver
 ![XML by ID](/xml_id.png)
 ###### JSON by ID
 ![JSON by ID](/json_id.png)
+<hr>
+</details>
+
+<details>
+<summary> Tugas 2: Implementasi Model-View-Template (MVT) pada Django </summary>
 
 ## Tugas 2: Implementasi Model-View-Template (MVT) pada Django
-
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
 ● Membuat direktori lokal bernama 'every-mart' dan masuk ke direktori tersebut melalui terminal
 ```
@@ -350,6 +362,7 @@ git push origin main
 git branch -M main
 git push pws main:master
 ```
+<hr>
 
 ### Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html
 ###### Bagan
@@ -362,6 +375,7 @@ git push pws main:master
 - Setelah semua Request terpenuhi, views akan mengembalikan ke Internet dan Internet akan mengembalikan ke Client dalam bentuk Web Page
 ###### Keterkaitan antara urls.py, views.py, models.py, dan berkas html
 'urls.py' berfungsi sebagai peta dalam web aplikasi dan menghubungkan pola URL sesuai dengan 'views.py'. 'views.py' menangani HTTP Request dan mengembalikan respons, serta berinteraksi dengan 'models.py' untuk memodifikasi data. 'models.py' akan menyediakan abstraksi untuk interaksi dengan database. 'berkas html' akan menentukan bagaimana data dari 'views.py' ditampilkan kepada Client
+<hr>
 
 ### Jelaskan fungsi git dalam pengembangan perangkat lunak!
 Git adalah alat software development yang memiliki fungsi sebagai version control system untuk melacak dan mengelola source code secara efisien. Dalam pengembangan perangkat lunak, Git memiliki beberapa peranan penting, yaitu:
@@ -369,11 +383,14 @@ Git adalah alat software development yang memiliki fungsi sebagai version contro
 - Git memudahkan dalam melakukan branching karena dapat membuat branch baru untuk keperluan pengembangan perangkat lunak dan branch tersebut dapat di-merge apabila diperlukan
 - Git menyimpan riwayat perubahan kode pada setiap commit yang dilakukan sehingga dimungkinkan untuk kembali ke versi sebelumnya apabila diperlukan
 - Git menyediakan berbagai fitur yang dapat memudahkan kolaborasi dalam waktu yang bersamaan untuk mempermudah pengembangan perangkat lunak dengan banyak developer
+<hr>
 
 ### Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
 Menurut saya, framework Django sebagai permulaan pembelajaran pengembangan perangkat lunak menawarkan kombinasi unik yang jarang ditemui pada framework lain. Penggunaan bahasa pemrograman Python memberi kemudahan karena sintaksnya bersih sehingga developer dapat mempelajari pengembangan perangkat lunak tanpa terjebak dalam sintaks yang rumit. 
 Framework Django memiliki arsitektur MVT (Model-View-Template) menghadirkan struktur yang logis dan intuitif untuk memahami alur pengembangan perangkat lunak. Selain itu, adanya ORM (Object-Relational Mapping) dapat membuat interaksi dengan database menjadi lebih mudah karena developer tidak perlu menulis kode SQL secara langsung. Tidak terbatas di situ saja, framework ini memiliki keunggulan dengan keamanan yang terintegrasi secara default. 
-Berdasarkan pengamatan saya selama beberapa minggu perkuliahan PBP, saya meyakini bahwa framework Django dapat menjadi framework yang paling cocok untuk memulai pembelajaran dalam pengembangan perangkat lunak dan memiliki potensi besar untuk pengembangan perangkat lunak lanjutan. 
+Berdasarkan pengamatan saya selama beberapa minggu perkuliahan PBP, saya meyakini bahwa framework Django dapat menjadi framework yang paling cocok untuk memulai pembelajaran dalam pengembangan perangkat lunak dan memiliki potensi besar untuk pengembangan perangkat lunak lanjutan
+<hr>
 
 ### Mengapa model pada Django disebut sebagai ORM?
-Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena perannya sebagai jembatan penghubung antara objek dalam Python dengan database relasional. ORM Django memungkinkan developer untuk mendefinisikan struktur data dan relasi menggunakan Python yang secara otomatis diterjemahkan ke dalam skema database dan operasi SQL yang sesuai. Mekanisme ini memudahkan developer untuk berinteraksi dengan databse menggunakan Python tanpa perlu menulis query SQL kompleks secara langsung. ORM yang dimiliki oleh Django membantu developer untuk berfokus pada pengembangan perangkat lunak daripada implementasi database.
+Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena perannya sebagai jembatan penghubung antara objek dalam Python dengan database relasional. ORM Django memungkinkan developer untuk mendefinisikan struktur data dan relasi menggunakan Python yang secara otomatis diterjemahkan ke dalam skema database dan operasi SQL yang sesuai. Mekanisme ini memudahkan developer untuk berinteraksi dengan databse menggunakan Python tanpa perlu menulis query SQL kompleks secara langsung. ORM yang dimiliki oleh Django membantu developer untuk berfokus pada pengembangan perangkat lunak daripada implementasi database
+<hr>
