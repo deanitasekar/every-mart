@@ -1,19 +1,28 @@
 # Every Mart
 ### <b>🛒 Toko Online Serba Ada untuk Semua Kebutuhan Anda 🛒</b>
-###### Nama: Deanita Sekar Kinasih
-###### NPM: 2306229405
-###### Kelas: PBP-D
-###### Link: http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
+##### Nama: Deanita Sekar Kinasih
+##### NPM: 2306229405
+##### Kelas: PBP-D
+###### http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
 
 ## Tugas 3: Implementasi Form dan Data Delivery pada Django
 ### Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
-
+Data delivery memungkinkan pertukaran informasi yang akurat dan efisien antara user, sistem, dan perangkat. Hal ini menjamin integritas data, meningkatkan kecepatan transfer dan mengoptimalkan penggunaan sumber daya platform. Mekanisme data delivery mendukung terjadinya pertukaran informasi secara mulus antara berbagai komponen, terutama antara front-end dan back-end. Dengan data delivery, sebuah platform dapat berfungsi secara optimal karena informasi yang masuk dapat dikelola dengan baik.
 
 ### Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Menurut saya, JSON lebih baik dari XML dengan beberapa alasan, yaitu:
+1. JSON menggunakan format yang lebih ringkas dibandingkan XML sehingga JSON memungkinkan representasi data yang sama dengan karakter yang lebih sedikit
+2. JSON lebih mudah di-parse oleh beberapa bahasa pemrograman sehingga proses pengolahan data lebih cepat
+3. JSON memiliki readibility yang tinggi sehingga mudah dibaca dan dipahami oleh pengguna
+4. JSON mendukung beberapa tipe data seperti string, object, dan array
+Dapat disimpulkan bahwa JSON lebih populer dibandingkan XML karena efisiensi yang ditawarkannya. Struktur data JSON yang sederhana tetapi memiliki banyak keunggulan membuat JSON menjadi pilihan utama dalam pengembangan platform. 
 
 ### Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+Method 'is_valid()' memiliki peranan penting untuk melakukan validasi data yang pengguna masukkan pada form. Apabila data yang dimasukkan pengguna tidak sesuai, method ini akan mengembalikan nilai 'False'. Sedangkan, apabila data yang dimasukkan pengguna sesuai, method ini akan mengembalikan nilai 'True' dan input data akan diproses di dalam 'Product Entry Form' yang akan mengarah ke 'models'. 
+Dengan demikian, method 'is_valid()' diperlukan untuk menjaga keamanan dan konsistensi data. Hal ini juga akan mempermudah dalam proses pemeliharaan yang dilakukan oleh para pengembang platform.
 
 ### Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+'csrf_token' diperlukan saat membuat form di Django sebagai perlindungan dari serangan Cross-Site Request Forgery (CSRF). Tanpa adanya 'csrf_token' pada form, platform menjadi rentan terhadap eksploitasi dimana penyerang dapat membuat 'request' dengan mudah tanpa sepengetahuan pengguna karena 'request' tidak dicek terlebih dahulu. Mekanisme'csrf_token' melibatkan penyisipan token unik ke dalam form HTML, yang akan diverifikasi saat 'request' diterima. Token unik ini tidak dapat diketahui oleh penyerang sehingga menyulitkan penyerang untuk melakukan 'request' tanpa sepengetahuan pengguna. Sehingga, 'csrf_token' sangat krusial untuk menjaga integritas dan keamanan platform agar terhindar dari CSRF. 
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 ● Mengubah primary key dari integer menjadi UUID untuk best practice dari sisi keamanan aplikasi dengan melakukan modifikasi 'models.py'
@@ -193,8 +202,17 @@ python manage.py runserver
 ```
 
 ### Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman
+###### XML
+![XML](/xml.png)
+###### JSON
+![JSON](/json.png)
+###### XML by ID
+![XML by ID](/xml_id.png)
+###### JSON by ID
+![JSON by ID](/json_id.png)
 
 ## Tugas 2: Implementasi Model-View-Template (MVT) pada Django
+
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
 ● Membuat direktori lokal bernama 'every-mart' dan masuk ke direktori tersebut melalui terminal
 ```
