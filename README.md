@@ -102,7 +102,7 @@ from main.views import show_main
 ```py
     path('create-product', create_product, name='create_product'),
 ```
-● Membuat 'create_product.html' dalam 'main/templates'
+- Membuat 'create_product.html' dalam 'main/templates'
 ```py
 {% extends 'base.html' %} 
 {% block content %}
@@ -295,7 +295,7 @@ python manage.py startapp main
 </body>
 </html>
 ```
-● Melakukan modifikasi 'models.py' dalam direktori aplikasi 'main'
+- Melakukan modifikasi 'models.py' dalam direktori aplikasi 'main'
 ```py
 from django.db import models
 
@@ -313,7 +313,7 @@ class Product(models.Model) :
 python manage.py makemigrations
 python manage.py migrate
 ```
-● Mengintegrasikan komoponen MVT dengan melakukan modifikasi `views.py` dalam direktori aplikasi `main`
+- Mengintegrasikan komponen MVT dengan melakukan modifikasi `views.py` dalam direktori aplikasi `main`
 ```py
 from django.shortcuts import render
 
