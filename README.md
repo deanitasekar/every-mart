@@ -7,6 +7,7 @@
 <b> Kelas: PBP-D </b>
 
 ###### http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
+<hr>
 
 <details>
 <summary> Tugas 3: Implementasi Form dan Data Delivery pada Django </summary>
