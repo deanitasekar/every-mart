@@ -1,8 +1,8 @@
 # Every Mart
 ### <b>🛒 Toko Online Serba Ada untuk Semua Kebutuhan Anda 🛒</b>
-##### Nama: Deanita Sekar Kinasih
-##### NPM: 2306229405
-##### Kelas: PBP-D
+<b> Nama: Deanita Sekar Kinasih
+NPM: 2306229405
+Kelas: PBP-D </b>
 ###### http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
 
 ## Tugas 3: Implementasi Form dan Data Delivery pada Django
