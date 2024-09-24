@@ -16,7 +16,7 @@ def show_main(request):
     products = Product.objects.all()
     context = {
         'npm' : '2306229405',
-        'name': 'Deanita Sekar Kinasih',
+        'name': request.user.username,
         'class': 'PBP D',
         'products' : products,
         'last_login': request.COOKIES['last_login'],
@@ -28,7 +28,9 @@ def create_product(request):
     form = ProductEntryForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
-        form.save()
+        mood_entry = form.save(commit=False)
+        mood_entry.user = request.user
+        mood_entry.save()
         return redirect('main:show_main')
 
     context = {'form': form}
