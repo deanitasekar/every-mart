@@ -84,7 +84,7 @@ Selain mengingat User yang telah login, cookies memili beberapa kegunaan lain, y
   Cookies dapat menyimpan data tentang halaman yang telah dikunjungi oleh User
 - **Fitur 'Remember Me'** 
   Cookies memungkinkan User untuk tetap login meskipun User telah menutup dan membuka kembali browser
-<br>
+
 Namun, **tidak semua cookies aman digunakan**. Salah satu contoh cookies yang tidak aman adalah  **cookies tanpa atribut HttpOnly** yang rentan terhadap serangan XSS (Cross Site Scripting) karena dapat diakses oleh JavaScript yang berpotensi berbahaya. Oleh karena itu, penting untuk menerapkan pengaturan seperti Secure, HttpOnly, dan SameSite agar dapat mengurangi risiko keamanan.
 <hr>
 
