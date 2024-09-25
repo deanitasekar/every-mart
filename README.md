@@ -1,18 +1,340 @@
 # Every Mart
 ### <b>🛒 Toko Online Serba Ada untuk Semua Kebutuhan Anda 🛒</b>
-<b> Nama: Deanita Sekar Kinasih </b>
-
-<b> NPM: 2306229405 </b>
-
-<b> Kelas: PBP-D </b>
+**Nama: Deanita Sekar Kinasih** <br>
+**NPM: 2306229405**<br>
+**Kelas: PBP-D**<br>
 
 ###### http://deanita-sekar-everymart.pbp.cs.ui.ac.id/
 <hr>
 
 <details>
-<summary> Tugas 3: Implementasi Form dan Data Delivery pada Django </summary>
+<summary> <strong> Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django </strong> </summary>
 
-## Tugas 3: Implementasi Form dan Data Delivery pada Django
+### Apa perbedaan antara HttpResponseRedirect() dan redirect()
+**HttpResponseRedirect()**
+`HttpResponseRedirect()` mengembalikan objek dengan kode status 302, yang memberi instruksi untuk melakukan pengalihan ke URL tertentu secara manual. `HttpResponseRedirect()` umumnya digunakan ketika terdapat URL yang ingin dituju (absolute path), sehingga tidak memerlukan penanganan tambahan dari Django.
+Contoh:
+```py
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+def login_user(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            # HttpResponseRedirect ke URL
+            return HttpResponseRedirect(reverse('main:show_main'))
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+```
+**redirect()**
+`redirect()` merupakan helper function yang disediakan oleh Djangodengan berbagai parameter. `redirect()` cenderung lebih fleksibel karena dapat menerima berbagai parameter, seperti model, view, dan URL. Django akan melakukan konversi parameter yang diberikan menjadi URL, lalu mengembalikan `HttpResponseRedirect()`.
+Contoh:
+```py
+from django.shortcuts import redirect
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            # Redirect ke view
+            return redirect('main:login')
+    else:
+        form = UserCreationForm()
+    
+    return render(request, 'register.html', {'form': form})
+```
+Dapat disimpulkan bahwa `HttpResponseRedirect()` memerlukan URL secara eksplisit, sedangkan `redirect()` dapat menerima berbagai parameter sehingga lebih fleksibel.
+<hr>
+
+### Jelaskan cara kerja penghubungan model Product dengan User!
+Penghubungan model `Product` dengan User dilakukan dengan menggunakan **ForeignKey**, yang mencipatakan relasi **many-to-one**. Relasi ini memungkinkan User memiliki banyak Product, tetapi satu Product hanya dimiliki satu User.
+Setiap kali User membuat entri Product, maka Product tersebut secara otomatis terhubung dengan User yang sedang login melalui atribut `user`. Atribut `user` dalam model `Product` merujuk ke model `User` dengan `ForeignKey(User, on_delete=models.CASCADE)`, memastikan bahwa Product tersebut dimiliki oleh satu pengguna tertentu. Ketika User dihapus, Product yang ditambahkan oleh User tersebut juga akan dihapus dengan `on_delete=models.CASCADE`. 
+Contoh implemenetasi:
+```py
+class Product(models.Model) :
+   user = models.ForeignKey(User, on_delete=models.CASCADE)
+   mood = models.CharField(max_length=255)
+   time = models.DateField(auto_now_add=True)
+   feelings = models.TextField() 
+```
+<hr>
+
+### Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+
+**Authentication**
+Authentication adalah proses verifikasi identitas User. Untuk melakukan authentication, User akan diminta untuk memasukkan kredensial seperti username dan passowrd. Kemudian, Django menggunakan fungsi `authenticate()` untuk melakukan verifikasi kredensial dan `login()` untuk mencatat User. Setelah login berhasil, informasi User akan disimpan dalam **session**.
+**Authorization**
+Authorization adalah proses penetuan hak akses atau izin User untuk mengakses fitur atau data tertentu. Setelah melakukan authentication, Django akan menyimpan informasi User untuk authorization. Django menggunakan permissons dan groups, serta decorator seperti `@login_required` untuk mengatur hak akses atau izin User. 
+<hr>
+
+### Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+Django mengingat User yang telah login melalui mekanisme **session** yang dikelola oleh **cookies**. Setelah User telah berhasil login, Django akan membuat **session ID** yang disimpan di server dan ditempatkan dalam **cookies** di browser. Setiap kali User membuat request baru, maka browser akan mengirimkan **session ID** sehingga Django dapat melakukan identifikasi User tanpa mengharuskan User untuk login kembali.
+Selain mengingat User yang telah login, cookies memili beberapa kegunaan lain, yaitu:
+- **Menyimpan preferensi pengguna**
+> Cookies dapat menyimpan preferensi pilihan User, seperti preferensi tampilan atau bahasa yang digunakan
+- **Melacak aktivitas pengguna**
+> Cookies dapat menyimpan data tentang halaman yang telah dikunjungi oleh User
+- **Fitur 'Remember Me'**
+> Cookies memungkinkan User untuk tetap login meskipun User telah menutup dan membuka kembali browser
+Namun, tidak semua cookies aman digunakan. Salah satu contoh cookies yang tidak aman adalah  **cookies tanpa atribut HttpOnly** yang rentan terhadap serangan XSS (Cross Site Scripting) karena dapat diakses oleh JavaScript yang berpotensi berbahaya. Oleh karena itu, penting untuk menerapkan pengaturan seperti Secure, HttpOnly, dan SameSite agar dapat mengurangi risiko keamanan.
+<hr>
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+**Fungsi dan form registrasi pengguna**
+- Menambahkan import pada `views.py` dalam `main`
+```py
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+```
+- Menambahkan fungsi `register` dalam `views.py` untuk otomasisasi form registrasi pengguna
+```py
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+```
+- Membuat `register.html` dalam `main/templates` untuk form registrasi pengguna
+```
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Register</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="login">
+  <h1>Register</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+      <tr>
+        <td></td>
+        <td><input type="submit" name="submit" value="Daftar" /></td>
+      </tr>
+    </table>
+  </form>
+
+  {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+{% endblock content %}
+```
+- Memodifikasi `urls.py` dalam `main` dengan menambahkan import dan path url untuk konfigurasi URL
+```py
+from main.views import register
+...
+    urlpatterns = [
+        ...
+        path('register/', register, name='register'),
+    ]
+```
+**Fungsi login pengguna**
+- Memodifikasi `views.py` dalam `main` dengan menambahkan import dan fungsi `login_user`
+```py
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import authenticate, login
+...
+def login_user(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+
+        if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                return redirect('main:show_main')
+
+    else:
+        form = AuthenticationForm(request)
+    context = {'form': form}
+    return render(request, 'login.html', context)
+```
+- Membuat berkas `login.html` dalam `main/templates` untuk login pengguna
+```py
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="login">
+    <h1>Login</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td><input class="btn login_btn" type="submit" value="Login" /></td>
+        </tr>
+        </table>
+    </form>
+
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} Don't have an account yet?
+    <a href="{% url 'main:register' %}">Register Now</a>
+</div>
+
+{% endblock content %}
+```
+- Memodifikasi `urls.py` dalam `main` dengan menambahkan import dan path url untuk konfigurasi URL
+```py
+from main.views import login_user
+...
+    urlpatterns = [
+    ...
+    path('login/', login_user, name='login'),
+    ]
+```
+**Fungsi logout pengguna**
+- Memodifikasi `views.py` dalam `main` dengan menambahkan import dan modifikasi fungsi `logout_user`
+```py
+from django.contrib.auth import logout
+...
+def logout_user(request):
+    logout(request)
+    return redirect('main:login')
+```
+- Memodifikasi `main.html` dalam `main/templates` untuk menambahkan hyperlink tag
+```py
+<a href="{% url 'main:logout' %}">
+  <button>Logout</button>
+</a>
+```
+- Memodifikasi `urls.py` dalam `main` dengan menambahkan import dan path url untuk konfigurasi URL
+```py
+from main.views import logout_user
+...
+    urlpatterns = [
+    ...
+    path('logout/', logout_user, name='logout'),
+    ]
+```
+**Restriksi akses**
+- Modifikasi `views.py` dalam `main`
+```py
+from django.contrib.auth.decorators import login_required
+@login_required(login_url='/login')
+```
+- Modifikasi `views.py` dalam `main` untuk menambahkan data last login pengguna dengan menambahkan impor, modifikasi fungsi `login_user`, modifikasi `show_main`, serta modifikasi `logout_user`
+```py
+import datetime
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+...
+if form.is_valid():
+    user = form.get_user()
+    login(request, user)
+    response = HttpResponseRedirect(reverse("main:show_main"))
+    response.set_cookie('last_login', str(datetime.datetime.now()))
+    return response
+...
+context = {
+    'name': 'Pak Bepe',
+    'class': 'PBP D',
+    'npm': '2306123456',
+    'mood_entries': mood_entries,
+    'last_login': request.COOKIES['last_login'],
+}
+```
+**Data dari cookies**
+- Modifikasi `main.html` dalam `main/templates` untuk menampilkan data last login
+```
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+```
+**Menghubungkan Model `Product` dengan User**
+- Modifikasi `models.py` dalam `main`
+```
+from django.contrib.auth.models import User
+...
+class Product(models.Model) :
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+```
+- Modifikasi `views.py` dalam `main` dengan modifikasi fungsi `create_product` dan fungsi `show_main`
+```py
+def show_main(request):
+    products = Product.objects.all()
+    context = {
+        'npm' : '2306229405',
+        'name': request.user.username,
+        'class': 'PBP D',
+        'products' : products,
+        'last_login': request.COOKIES['last_login'],
+    }
+
+    return render(request, "main.html", context)
+...
+def create_product(request):
+    form = ProductEntryForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        mood_entry = form.save(commit=False)
+        mood_entry.user = request.user
+        mood_entry.save()
+        return redirect('main:show_main')
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+```
+- Melakukan migrasi model (dengan syarat minimal satu user dalam database) pada terminal
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+- Modifikasi `settings.py` dalam `mental_health_tracker` dengan menambahkan import dan mengganti variabel
+```py
+import os
+...
+PRODUCTION = os.getenv("PRODUCTION", False)
+DEBUG = not PRODUCTION
+```
+**Github dan PWS**
+- Mengunggah perubahan pada repositori GitHub dan melakukan push ke PWS
+```
+git add .
+git commit -m "..."
+git push origin main
+
+git branch -M main
+git push pws main:master
+```
+<hr>
+
+</details>
+
+<details>
+<summary> <strong> Tugas 3: Implementasi Form dan Data Delivery pada Django </strong> </summary>
+
 ### Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 Data delivery memungkinkan pertukaran informasi yang akurat dan efisien antara user, sistem, dan perangkat. Hal ini menjamin integritas data, meningkatkan kecepatan transfer dan mengoptimalkan penggunaan sumber daya platform. Mekanisme data delivery mendukung terjadinya pertukaran informasi secara mulus antara berbagai komponen, terutama antara front-end dan back-end. Dengan data delivery, sebuah platform dapat berfungsi secara optimal karena informasi yang masuk dapat dikelola dengan baik.
 <hr>
@@ -36,7 +358,7 @@ Dengan demikian, method 'is_valid()' diperlukan untuk menjaga keamanan dan konsi
 <hr>
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
-- Mengubah primary key dari integer menjadi UUID untuk best practice dari sisi keamanan aplikasi dengan melakukan modifikasi 'models.py'
+- Mengubah primary key dari integer menjadi UUID untuk best practice dari sisi keamanan aplikasi dengan melakukan modifikasi `models.py`
 ```py
 import uuid # modifikasi
 from django.db import models
@@ -235,9 +557,8 @@ git push pws main:master
 </details>
 
 <details>
-<summary> Tugas 2: Implementasi Model-View-Template (MVT) pada Django </summary>
+<summary> <strong> Tugas 2: Implementasi Model-View-Template (MVT) pada Django </strong> </summary>
 
-## Tugas 2: Implementasi Model-View-Template (MVT) pada Django
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
 - Membuat direktori lokal bernama `every-mart` dan masuk ke direktori tersebut melalui terminal
 ```
