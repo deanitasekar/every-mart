@@ -13,7 +13,7 @@
 ### Apa perbedaan antara HttpResponseRedirect() dan redirect()
 **HttpResponseRedirect()** <br>
 `HttpResponseRedirect()` mengembalikan objek dengan kode status 302, yang memberi instruksi untuk melakukan pengalihan ke URL tertentu secara manual. `HttpResponseRedirect()` umumnya digunakan ketika terdapat URL yang ingin dituju (absolute path), sehingga tidak memerlukan penanganan tambahan dari Django.
-Contoh:
+Contoh implementasi `HttpResponseRedirect()`:
 ```py
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -32,7 +32,7 @@ def login_user(request):
 ```
 **redirect()** <br>
 `redirect()` merupakan helper function yang disediakan oleh Djangodengan berbagai parameter. `redirect()` cenderung lebih fleksibel karena dapat menerima berbagai parameter, seperti model, view, dan URL. Django akan melakukan konversi parameter yang diberikan menjadi URL, lalu mengembalikan `HttpResponseRedirect()`.
-Contoh:
+Contoh implementasi `redirect()`:
 ```py
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -57,7 +57,7 @@ Dapat disimpulkan bahwa `HttpResponseRedirect()` memerlukan URL secara eksplisit
 ### Jelaskan cara kerja penghubungan model Product dengan User!
 Penghubungan model `Product` dengan User dilakukan dengan menggunakan **ForeignKey**, yang mencipatakan relasi **many-to-one**. Relasi ini memungkinkan User memiliki banyak Product, tetapi satu Product hanya dimiliki satu User.
 Setiap kali User membuat entri Product, maka Product tersebut secara otomatis terhubung dengan User yang sedang login melalui atribut `user`. Atribut `user` dalam model `Product` merujuk ke model `User` dengan `ForeignKey(User, on_delete=models.CASCADE)`, memastikan bahwa Product tersebut dimiliki oleh satu pengguna tertentu. Ketika User dihapus, Product yang ditambahkan oleh User tersebut juga akan dihapus dengan `on_delete=models.CASCADE`. 
-Contoh implemenetasi:
+Contoh implementasi penghubungan model `Product` dengan User:
 ```py
 class Product(models.Model) :
    user = models.ForeignKey(User, on_delete=models.CASCADE)
