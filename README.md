@@ -11,7 +11,7 @@
 <summary> <strong> Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django </strong> </summary>
 
 ### Apa perbedaan antara HttpResponseRedirect() dan redirect()
-**HttpResponseRedirect()**
+**HttpResponseRedirect()** <br>
 `HttpResponseRedirect()` mengembalikan objek dengan kode status 302, yang memberi instruksi untuk melakukan pengalihan ke URL tertentu secara manual. `HttpResponseRedirect()` umumnya digunakan ketika terdapat URL yang ingin dituju (absolute path), sehingga tidak memerlukan penanganan tambahan dari Django.
 Contoh:
 ```py
@@ -30,7 +30,7 @@ def login_user(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 ```
-**redirect()**
+**redirect()** <br>
 `redirect()` merupakan helper function yang disediakan oleh Djangodengan berbagai parameter. `redirect()` cenderung lebih fleksibel karena dapat menerima berbagai parameter, seperti model, view, dan URL. Django akan melakukan konversi parameter yang diberikan menjadi URL, lalu mengembalikan `HttpResponseRedirect()`.
 Contoh:
 ```py
@@ -69,9 +69,9 @@ class Product(models.Model) :
 
 ### Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
 
-**Authentication**
+**Authentication** <br>
 Authentication adalah proses verifikasi identitas User. Untuk melakukan authentication, User akan diminta untuk memasukkan kredensial seperti username dan passowrd. Kemudian, Django menggunakan fungsi `authenticate()` untuk melakukan verifikasi kredensial dan `login()` untuk mencatat User. Setelah login berhasil, informasi User akan disimpan dalam **session**.
-**Authorization**
+**Authorization** <br>
 Authorization adalah proses penetuan hak akses atau izin User untuk mengakses fitur atau data tertentu. Setelah melakukan authentication, Django akan menyimpan informasi User untuk authorization. Django menggunakan permissons dan groups, serta decorator seperti `@login_required` untuk mengatur hak akses atau izin User. 
 <hr>
 
@@ -79,12 +79,12 @@ Authorization adalah proses penetuan hak akses atau izin User untuk mengakses fi
 Django mengingat User yang telah login melalui mekanisme **session** yang dikelola oleh **cookies**. Setelah User telah berhasil login, Django akan membuat **session ID** yang disimpan di server dan ditempatkan dalam **cookies** di browser. Setiap kali User membuat request baru, maka browser akan mengirimkan **session ID** sehingga Django dapat melakukan identifikasi User tanpa mengharuskan User untuk login kembali.
 Selain mengingat User yang telah login, cookies memili beberapa kegunaan lain, yaitu:
 - **Menyimpan preferensi pengguna**
-> Cookies dapat menyimpan preferensi pilihan User, seperti preferensi tampilan atau bahasa yang digunakan
+  Cookies dapat menyimpan preferensi pilihan User, seperti preferensi tampilan atau bahasa yang digunakan
 - **Melacak aktivitas pengguna**
-> Cookies dapat menyimpan data tentang halaman yang telah dikunjungi oleh User
+  Cookies dapat menyimpan data tentang halaman yang telah dikunjungi oleh User
 - **Fitur 'Remember Me'**
-> Cookies memungkinkan User untuk tetap login meskipun User telah menutup dan membuka kembali browser
-Namun, tidak semua cookies aman digunakan. Salah satu contoh cookies yang tidak aman adalah  **cookies tanpa atribut HttpOnly** yang rentan terhadap serangan XSS (Cross Site Scripting) karena dapat diakses oleh JavaScript yang berpotensi berbahaya. Oleh karena itu, penting untuk menerapkan pengaturan seperti Secure, HttpOnly, dan SameSite agar dapat mengurangi risiko keamanan.
+  Cookies memungkinkan User untuk tetap login meskipun User telah menutup dan membuka kembali browser
+Namun, **tidak semua cookies aman digunakan**. Salah satu contoh cookies yang tidak aman adalah  **cookies tanpa atribut HttpOnly** yang rentan terhadap serangan XSS (Cross Site Scripting) karena dapat diakses oleh JavaScript yang berpotensi berbahaya. Oleh karena itu, penting untuk menerapkan pengaturan seperti Secure, HttpOnly, dan SameSite agar dapat mengurangi risiko keamanan.
 <hr>
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
