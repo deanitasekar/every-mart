@@ -93,7 +93,7 @@ Flexbox dan Grid Layout adalah dua metode modern dalam CSS yang digunakan untuk 
         1. Membuat layout halaman yang kompleks dengan mudah.
         2. Mengatur elemen dalam grid yang terdefinisi.
         3. Menempatkan elemen pada posisi spesifik dalam layout.
-    - Grid layout kontrol yang lebih presisi atas penempatan elemen dalam dua dimensi, sehingga cocok untuk desain dashboard, galeri foto, atau layout halaman utama. <br>
+    - Grid layout memberikan kontrol yang lebih presisi atas penempatan elemen dalam dua dimensi, sehingga cocok untuk desain dashboard, galeri foto, atau layout halaman utama. <br>
 <hr>
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
