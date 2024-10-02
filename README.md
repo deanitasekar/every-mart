@@ -80,20 +80,20 @@ Banyak aplikasi populer sudah menerampkan responsive design, seperti YouTube, Tw
 ### Jelaskan konsep flex box dan grid layout beserta kegunaannya!
 Flex box dan grid layout adalah metode modern dalam CSS untuk menciptakan tata letak responsif dan fleksibel pada aplikasi web.
 Flexbox dan Grid Layout adalah dua metode modern dalam CSS yang digunakan untuk menciptakan tata letak responsif dan fleksibel pada website. Keduanya memiliki karakteristik dan kegunaan yang berbeda: <br>
-**Flexbox (Flexible Box Layout)**
-- Flexbox adalah sistem tata letak satu dimensi yang fokus pada pengaturan elemen dalam satu baris atau kolom.
-- Kegunaan flexbox:
-    1. Menyusun elemen secara horizontal atau vertikal dengan mudah.
-    2. Mengatur penyebaran ruang antar elemen secara otomatis.
-    3. Menyelaraskan elemen di dalam kontainer.
-- Flexbox dangat fleksibel untuk tata letak sederhana dan responsif, sehingga ideal untuk komponen UI seperti navigation bar, menu, atau daftar item. <br>
-**Grid Layout**
-- Grid layout adalah sistem tata letak dua dimensi yang memungkinkan pengaturan elemen dalam baris dan kolom secara bersamaan.
-- Kegunaan grid layout:
-    1. Membuat layout halaman yang kompleks dengan mudah.
-    2. Mengatur elemen dalam grid yang terdefinisi.
-    3. Menempatkan elemen pada posisi spesifik dalam layout.
-- Grid layout kontrol yang lebih presisi atas penempatan elemen dalam dua dimensi, sehingga cocok untuk desain dashboard, galeri foto, atau layout halaman utama. <br>
+- **Flexbox (Flexible Box Layout)**
+    - Flexbox adalah sistem tata letak satu dimensi yang fokus pada pengaturan elemen dalam satu baris atau kolom.
+    - Kegunaan flexbox:
+        1. Menyusun elemen secara horizontal atau vertikal dengan mudah.
+        2. Mengatur penyebaran ruang antar elemen secara otomatis.
+        3. Menyelaraskan elemen di dalam kontainer.
+    - Flexbox dangat fleksibel untuk tata letak sederhana dan responsif, sehingga ideal untuk komponen UI seperti navigation bar, menu, atau daftar item. <br>
+- **Grid Layout**
+    - Grid layout adalah sistem tata letak dua dimensi yang memungkinkan pengaturan elemen dalam baris dan kolom secara bersamaan.
+    - Kegunaan grid layout:
+        1. Membuat layout halaman yang kompleks dengan mudah.
+        2. Mengatur elemen dalam grid yang terdefinisi.
+        3. Menempatkan elemen pada posisi spesifik dalam layout.
+    - Grid layout kontrol yang lebih presisi atas penempatan elemen dalam dua dimensi, sehingga cocok untuk desain dashboard, galeri foto, atau layout halaman utama. <br>
 <hr>
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
