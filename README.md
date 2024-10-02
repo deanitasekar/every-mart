@@ -8,6 +8,275 @@
 <hr>
 
 <details>
+<summary> <strong> Tugas 5: Desain Web menggunakan HTML, CSS dan Framework CSS </strong> </summary>
+
+### Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+Jika terdapat beberapa CSS selector untuk suatu elemen HTML, urutan prioritas pengambilan:
+1. Inline Style <br>
+    Inline style didefinisikan langsung pada elemen HTML menggunakan atribut `style` dan memiliki prioritas tertinggi
+2. ID Selectors <br>
+    ID Selectors menggunakan atribut `id` dari suatu elemen dan itandai dengan awalan `#`
+3. Classes dan Pseudo-classes <br>
+    Classes dan Pseudo-classes menggunakan nama `class` atau pseudo-classes dan ditandai dengan awalan `.`
+4. Attributes <br>
+    Attributes yang biasa digunakan pada attributes HTML
+5. Elements dan pseudo-elements <br>
+    Elements dan pseudo-elements memiliki prioritas rendah dan akan digunakan jika tidak ada style lain yang didefinisikan
+Contoh:
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+        p {
+            color: black;
+        }
+
+        .class-selector {
+            color: blue;
+        }
+
+        #id-selector {
+            color: green;
+        }
+
+        [type="text"] {
+            color: purple;
+        }
+
+        p:hover {
+            color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <p style="color: red;" id="id-selector" class="class-selector" type="text">
+        Urutan prioritas CSS selector
+    </p>
+</body>
+
+</html>
+```
+<hr>
+
+### Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+Responsive design menjadi konsep yang penting dalam pengembangan aplikasi web karena munculnya beragam perangkat dengan berbagai ukuran layar, seperti desktop, tablet, dan ponsel utnuk mengakses internet. Dengan adanya responsive design, aplikasi web dapat beradaptasi secara otomatis, menampilkan tampilan dan fungsionalitas yang optimal di semua perangkat. Hal ini dapat meningkatkan kenyamanan pengguna dan memastikan konsistensi penggalaman pengguna terlepas dari perangkat yang digunakan.
+Banyak aplikasi populer sudah menerampkan responsive design, seperti YouTube, Twitter, Instagram, dan LinkedIn. Contoh lain aplikasi yang sudah menerapkan responsive design adalah SCeLE (Student Centered e-Learning Environment) yang digunakan sebagai media pembelajaran online yang ada di Fasilkom UI. Di sisi lain, ada aplikasi yang belum menerapkan responsive design, yaitu SIAKNG (Sistem Informasi Akademik Next Generation) untuk membantu menunjang kegiatan akademik di Universitas Indonesia. Aplikasi web ini masih menampilkan versi desktop yang tidak optimal ketika diakses melakui mobile. Hal ini mengharuskan pengguna melakukan zoom in dan scrolling berlebihan. Contoh lain aplikasi yang belum menerapkan responsive design adalah Pacil Web Service (PWS) yag digunakan dalam mata kuliah Pemrigraman Berbasis Platform (PBP). Hal ini emngakibatkan pengguna perlu membuka aplikasi web tersebut dalam layar penuh pada desktop.
+<hr>
+
+### Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+| **Komponen** | **Detail**                                                                 | **Contoh implementasi**                                                                 |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| **Margin**   | Ruang di luar elemen yang memisahkan elemen satu dengan lainnya. Margin memiliki fungsi untuk mengatur jarah antar elemen dan tidak memperngaruhi ukuran elemen.   | `margin: 10px 20 px 15 px 20 px;` |
+| **Border**   | Garis yang mengelilingi elemen untuk memberikan batas visual pada elemen. Border dapat diatur ketebalan, warna, dan gaya, serta menambah ukuran total elemen | `border: 2px solid black;` |
+| **Padding**  | Ruang di antara konten dan border di dalam elemen. Padding berfungsi untuk memberikan jarak internal antara konten dan batas elemen, meningkatkan keterbacaan dan estetika konten. Padding hanya menggeser konten dan transparan. | `padding: 10px;` |
+<hr> 
+
+### Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+Flex box dan grid layout adalah metode modern dalam CSS untuk menciptakan tata letak responsif dan fleksibel pada aplikasi web.
+Flexbox dan Grid Layout adalah dua metode modern dalam CSS yang digunakan untuk menciptakan tata letak responsif dan fleksibel pada website. Keduanya memiliki karakteristik dan kegunaan yang berbeda:
+**Flexbox (Flexible Box Layout)**
+- Flexbox adalah sistem tata letak satu dimensi yang fokus pada pengaturan elemen dalam satu baris atau kolom.
+- Kegunaan flexbox:
+    1. Menyusun elemen secara horizontal atau vertikal dengan mudah.
+    2. Mengatur penyebaran ruang antar elemen secara otomatis.
+    3. Menyelaraskan elemen di dalam kontainer.
+- Flexbox dangat fleksibel untuk tata letak sederhana dan responsif, sehingga ideal untuk komponen UI seperti navigation bar, menu, atau daftar item.
+**Grid Layout**
+- Grid layout adalah sistem tata letak dua dimensi yang memungkinkan pengaturan elemen dalam baris dan kolom secara bersamaan.
+- Kegunaan grid layout:
+    1. Membuat layout halaman yang kompleks dengan mudah.
+    2. Mengatur elemen dalam grid yang terdefinisi.
+    3. Menempatkan elemen pada posisi spesifik dalam layout.
+- Grid layout kontrol yang lebih presisi atas penempatan elemen dalam dua dimensi, sehingga cocok untuk desain dashboard, galeri foto, atau layout halaman utama.
+<hr>
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+**Menyambungkan template Django dengan Tailwind**
+- Melakukan modifikasi `base.html` pada `main/templates`
+```html
+<head>
+{% block meta %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock meta %}
+<script src="https://cdn.tailwindcss.com">
+</script>
+</head>
+</details>
+```
+**Menambahkan fitur `Edit Product` dan `Hapus Product`**
+- Melakukan modifikasi `views.py` dalam `main` dengan menambahkan fungsi `edit_product` dan `hapus_product` serta menambahkan import
+``` py
+from django.shortcuts import .., reverse
+from django.http import .., HttpResponseRedirect
+...
+def edit_product (request, id):
+    # Get product berdasarkan id
+    product = Product.objects.get(pk = id)
+    
+    # Set product sebagai isntance dari form
+    form = ProductEntryForm(request.POST or None, instance = product)
+    
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+    
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
+
+def delete_product(request, id):
+    # Get product berdasarkan id
+    product = Product.objects.get(pk = id)
+    
+    # Hapus product
+    product.delete()
+    
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:show_main'))
+```
+- Menambahkan berkas `edit_product.html` dalam `main/templates`
+```html
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Edit Product</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Edit Mood"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
+```
+- Modifikasi `urls.py` dalam `main` dengan import fungsi `edit_product` dan `delete_product`, serta menambahkan path url ke `urlpatterns`
+```py
+from main.views import edit_product, delete_product
+...
+    path('edit-product/<uuid:id>', edit_product, name='edit_product'),
+    path('delete/<uuid:id>', delete_product, name='delete_product'),
+```
+- Modifikasi `main.html` dalam `main/templates`
+```html
+    ...
+    <td>
+        <a href="{% url 'main:edit_product' product.pk %}">
+            <button>
+                Edit
+            </button>
+        </a>
+    </td>
+    <td>
+        <a href="{% url 'main:delete_product' product.pk %}">
+            <button>
+                Delete
+            </button>
+        </a>
+    </td>
+...
+```
+**Melakukan modifikasi pada template HTML menggunakan Tailwind**
+- Menambahkan Navigation Bar dengan membuat berkas `navbar.html` pada `main/templates` dan menautkan navbar dengan `main.html`, `create_product.html`, dan `edit_html`
+- Modifikasi `settings.py` untuk konfigurasi Static Files
+```py
+...
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    ...
+]
+...
+STATIC_URL = '/static/'
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static'
+    ]
+else:
+    STATIC_ROOT = BASE_DIR / 'static'
+...
+```
+- Membuat `global.css` dalam `/static/css`, lalu menghubungkan `global.css` dan script Tailwind ke `base.html` untuk menambahkan Styles
+`base.html`
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block meta %} {% endblock meta %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
+  </head>
+  <body>
+    {% block content %} {% endblock content %}
+  </body>
+</html>
+```
+`global.css`
+```css
+.form-style form input, form textarea, form select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #bcbcbc;
+    border-radius: 0.375rem;
+    background-color: #f9fafb;
+    font-size: 1rem;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-style form input:focus, form textarea:focus, form select:focus {
+    outline: none;
+    border-color: #f39c12;
+    box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);
+}
+button, 
+.form-style form button {
+    background-color: #f39c12;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover, 
+.form-style form button:hover {
+    background-color: #e67e22;
+    transform: scale(1.05);
+}
+@keyframes shine {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+.animate-shine {
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3));
+    background-size: 200% 100%;
+    animation: shine 3s infinite;
+}
+```
+- Melakukan styling pada `login.html`, `register.html`, `card_info.html`, `card_product.html`, `create_product.html`, `edit_product.html`
+<hr>
+</details>
+
+<details>
 <summary> <strong> Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django </strong> </summary>
 
 ### Apa perbedaan antara HttpResponseRedirect() dan redirect()
@@ -330,7 +599,6 @@ git branch -M main
 git push pws main:master
 ```
 <hr>
-
 </details>
 
 <details>
