@@ -15,7 +15,7 @@ Jika terdapat beberapa CSS selector untuk suatu elemen HTML, urutan prioritas pe
 1. Inline Style <br>
     Inline style didefinisikan langsung pada elemen HTML menggunakan atribut `style` dan memiliki prioritas tertinggi
 2. ID Selectors <br>
-    ID Selectors menggunakan atribut `id` dari suatu elemen dan itandai dengan awalan `#`
+    ID Selectors menggunakan atribut `id` dari suatu elemen dan ditandai dengan awalan `#`
 3. Classes dan Pseudo-classes <br>
     Classes dan Pseudo-classes menggunakan nama `class` atau pseudo-classes dan ditandai dengan awalan `.`
 4. Attributes <br>
@@ -276,6 +276,16 @@ button:hover,
 }
 ```
 - Melakukan styling pada `login.html`, `register.html`, `card_info.html`, `card_product.html`, `create_product.html`, `edit_product.html`
+**Github dan PWS**
+- Mengunggah perubahan pada repositori GitHub dan melakukan push ke PWS
+```
+git add .
+git commit -m "..."
+git push origin main
+
+git branch -M main
+git push pws main:master
+```
 <hr>
 </details>
 
