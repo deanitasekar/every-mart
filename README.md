@@ -15,7 +15,7 @@ Jika terdapat beberapa CSS selector untuk suatu elemen HTML, urutan prioritas pe
 1. Inline Style <br>
     Inline style didefinisikan langsung pada elemen HTML menggunakan atribut `style` dan memiliki prioritas tertinggi
 2. ID Selectors <br>
-    ID Selectors menggunakan atribut `id` dari suatu elemen dan itandai dengan awalan `#`
+    ID Selectors menggunakan atribut `id` dari suatu elemen dan ditandai dengan awalan `#`
 3. Classes dan Pseudo-classes <br>
     Classes dan Pseudo-classes menggunakan nama `class` atau pseudo-classes dan ditandai dengan awalan `.`
 4. Attributes <br>
@@ -65,7 +65,7 @@ Referensi: [CSS Specificity](https://www.geeksforgeeks.org/css-specificity/)
 
 ### Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
 Responsive design menjadi konsep yang penting dalam pengembangan aplikasi web karena munculnya beragam perangkat dengan berbagai ukuran layar, seperti desktop, tablet, dan ponsel utnuk mengakses internet. Dengan adanya responsive design, aplikasi web dapat beradaptasi secara otomatis, menampilkan tampilan dan fungsionalitas yang optimal di semua perangkat. Hal ini dapat meningkatkan kenyamanan pengguna dan memastikan konsistensi penggalaman pengguna terlepas dari perangkat yang digunakan.
-Banyak aplikasi populer sudah menerampkan responsive design, seperti YouTube, Twitter, Instagram, dan LinkedIn. Contoh lain aplikasi yang sudah menerapkan responsive design adalah SCeLE (Student Centered e-Learning Environment) yang digunakan sebagai media pembelajaran online yang ada di Fasilkom UI. Di sisi lain, ada aplikasi yang belum menerapkan responsive design, yaitu SIAKNG (Sistem Informasi Akademik Next Generation) untuk membantu menunjang kegiatan akademik di Universitas Indonesia. Aplikasi web ini masih menampilkan versi desktop yang tidak optimal ketika diakses melakui mobile. Hal ini mengharuskan pengguna melakukan zoom in dan scrolling berlebihan. Contoh lain aplikasi yang belum menerapkan responsive design adalah Pacil Web Service (PWS) yag digunakan dalam mata kuliah Pemrigraman Berbasis Platform (PBP). Hal ini emngakibatkan pengguna perlu membuka aplikasi web tersebut dalam layar penuh pada desktop.
+Banyak aplikasi populer sudah menerampkan responsive design, seperti YouTube, Twitter, Instagram, dan LinkedIn. Contoh lain aplikasi yang sudah menerapkan responsive design adalah SCeLE (Student Centered e-Learning Environment) yang digunakan sebagai media pembelajaran online yang ada di Fasilkom UI. Di sisi lain, ada aplikasi yang belum menerapkan responsive design, yaitu SIAKNG (Sistem Informasi Akademik Next Generation) untuk membantu menunjang kegiatan akademik di Universitas Indonesia. Aplikasi web ini masih menampilkan versi desktop yang tidak optimal ketika diakses melakui mobile. Hal ini mengharuskan pengguna melakukan zoom in dan scrolling berlebihan. Contoh lain aplikasi yang belum menerapkan responsive design adalah Pacil Web Service (PWS) yang digunakan dalam mata kuliah Pemrograman Berbasis Platform (PBP). Hal ini mengakibatkan pengguna perlu membuka aplikasi web tersebut dalam layar penuh pada desktop.
 <hr>
 
 ### Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
@@ -93,7 +93,7 @@ Flexbox dan Grid Layout adalah dua metode modern dalam CSS yang digunakan untuk 
         1. Membuat layout halaman yang kompleks dengan mudah.
         2. Mengatur elemen dalam grid yang terdefinisi.
         3. Menempatkan elemen pada posisi spesifik dalam layout.
-    - Grid layout kontrol yang lebih presisi atas penempatan elemen dalam dua dimensi, sehingga cocok untuk desain dashboard, galeri foto, atau layout halaman utama. <br>
+    - Grid layout memberikan kontrol yang lebih presisi atas penempatan elemen dalam dua dimensi, sehingga cocok untuk desain dashboard, galeri foto, atau layout halaman utama. <br>
 <hr>
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
@@ -276,6 +276,16 @@ button:hover,
 }
 ```
 - Melakukan styling pada `login.html`, `register.html`, `card_info.html`, `card_product.html`, `create_product.html`, `edit_product.html`
+**Github dan PWS**
+- Mengunggah perubahan pada repositori GitHub dan melakukan push ke PWS
+```
+git add .
+git commit -m "..."
+git push origin main
+
+git branch -M main
+git push pws main:master
+```
 <hr>
 </details>
 
