@@ -22,6 +22,7 @@ Jika terdapat beberapa CSS selector untuk suatu elemen HTML, urutan prioritas pe
     Attributes yang biasa digunakan pada attributes HTML
 5. Elements dan pseudo-elements <br>
     Elements dan pseudo-elements memiliki prioritas rendah dan akan digunakan jika tidak ada style lain yang didefinisikan
+
 Contoh:
 ```html
 <!DOCTYPE html>
@@ -59,6 +60,7 @@ Contoh:
 
 </html>
 ```
+Referensi: [CSS Specificity](https://www.geeksforgeeks.org/css-specificity/)
 <hr>
 
 ### Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
@@ -67,11 +69,12 @@ Banyak aplikasi populer sudah menerampkan responsive design, seperti YouTube, Tw
 <hr>
 
 ### Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
-| **Komponen** | **Detail**                                                                 | **Contoh implementasi**                                                                 |
+![Margin, Border, dan Padding](/margin,border,padding.webp)
+| **Komponen** | **Detail** | **Contoh implementasi** |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| **Margin**   | Ruang di luar elemen yang memisahkan elemen satu dengan lainnya. Margin memiliki fungsi untuk mengatur jarah antar elemen dan tidak memperngaruhi ukuran elemen.   | `margin: 10px 20 px 15 px 20 px;` |
-| **Border**   | Garis yang mengelilingi elemen untuk memberikan batas visual pada elemen. Border dapat diatur ketebalan, warna, dan gaya, serta menambah ukuran total elemen | `border: 2px solid black;` |
-| **Padding**  | Ruang di antara konten dan border di dalam elemen. Padding berfungsi untuk memberikan jarak internal antara konten dan batas elemen, meningkatkan keterbacaan dan estetika konten. Padding hanya menggeser konten dan transparan. | `padding: 10px;` |
+| **Margin**   | Ruang di luar elemen yang memisahkan elemen satu dengan lainnya. Margin memiliki fungsi untuk mengatur jarah antar elemen dan tidak memperngaruhi ukuran elemen. |`margin: 10px 20 px 15 px 20 px;`|
+| **Border**   | Garis yang mengelilingi elemen untuk memberikan batas visual pada elemen. Border dapat diatur ketebalan, warna, dan gaya, serta menambah ukuran total elemen |`border: 2px solid black;`|
+| **Padding**  | Ruang di antara konten dan border di dalam elemen. Padding berfungsi untuk memberikan jarak internal antara konten dan batas elemen, meningkatkan keterbacaan dan estetika konten. Padding hanya menggeser konten dan transparan. |`padding: 10px;`|
 <hr> 
 
 ### Jelaskan konsep flex box dan grid layout beserta kegunaannya!
