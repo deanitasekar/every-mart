@@ -8,6 +8,95 @@
 <hr>
 
 <details>
+<summary> <strong> TTugas 6: JavaScript dan AJAX </strong> </summary>
+
+### Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+
+### Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+
+### Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+
+### Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+**Menambahkan error message saat login User**
+- Melakukan modifikasi `views.py` pada `main` dengan mengubah fungsi `login_user`
+```py
+...
+if form.is_valid():
+    user = form.get_user()
+    login(request, user)
+    response = HttpResponseRedirect(reverse("main:show_main"))
+    response.set_cookie('last_login', str(datetime.datetime.now()))
+    return response
+else:
+    messages.error(request, "Invalid username or password. Please try again.")
+...
+```
+**Menambahkan Product dengan AJAX**
+- Melakukan modifikasi `views.py` pada `main` dengan menambahkan impor dan fungsi `add_product_ajax`
+```py
+...
+@csrf_exempt
+@require_POST
+def add_product_ajax(request):
+    name = strip_tags(request.POST.get("name"))
+    price = request.POST.get("price")
+    description = strip_tags(request.POST.get("description"))
+    stock = request.POST.get("stock")
+    user = request.user
+
+    new_product = Product(
+        name=name, price=price,
+        description=description, stock=stock,
+        user=user
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
+    ...
+```
+**Menambahkan Routing untuk `add_prooduct_ajax`**
+- Melakukan modifikasi `views.py` dengan menambahkan impor dan path ke `urlpatterns`
+```py
+from main.views import add_product_ajax
+...
+urlpatterns = [
+    ...
+    path('add-product-ajax', add_product_ajax, name='add_product_ajax')
+]
+```
+**Menampilkan Product**
+- Melakukan modifikasi `views.py` pada `main` dengan menghapus beberapa baris
+```py
+product = Product.objects.filter(user=request.user)
+'product' : product,
+```
+- Melakukan modifikasi `views.py` pada `main` dengan mengubah fungsi `show_json` dan `show_xml`
+```py
+...
+def show_xml(request):
+    data = Product.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json(request):
+    data = Product.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+...
+```
+- Melakukan modifikasi `main.html` pada `main/templates` dengan mengahpus block conditional `mood_entries` dan mengganti dengan `<div id="mood_entry_cards"></div>`, serta menambahkan fungsi `getProduct`
+```py
+
+
+  async function getProduct(){
+      return fetch("{% url 'main:show_json' %}").then((res) => res.json())
+  }
+```
+
+
+</details>
+
+<details>
 <summary> <strong> Tugas 5: Desain Web menggunakan HTML, CSS dan Framework CSS </strong> </summary>
 
 ### Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
