@@ -84,14 +84,62 @@ def show_json(request):
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 ...
 ```
-- Melakukan modifikasi `main.html` pada `main/templates` dengan mengahpus block conditional `mood_entries` dan mengganti dengan `<div id="mood_entry_cards"></div>`, serta menambahkan fungsi `getProduct`
+- Melakukan modifikasi `main.html` pada `main/templates` dengan mengahpus block conditional `mood_entries`, mengganti dengan `<div id="mood_entry_cards"></div>`, menambahkan fungsi `getProduct`, dan menambahkan fungsi 
 ```py
-
-
+<div id="product_cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+...
+<script>
   async function getProduct(){
       return fetch("{% url 'main:show_json' %}").then((res) => res.json())
   }
+
+    async function refreshProducts() {
+    document.getElementById("product_cards").innerHTML = "";
+    document.getElementById("product_cards").className = "";
+    const products = await getProduct();
+    let htmlString = "";
+    let classNameString = "";
+
+    if (products.length === 0) {
+        classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
+        htmlString = `
+            <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                <img src="{% static 'images/sedih-banget.png' %}" alt="Sad face" class="w-64 h-64 mb-4"/>
+                <p class="text-center text-gray-600 mt-4">Belum ada product yang ditambahkan</p>
+            </div>
+        `;
+    }
+    else {
+        classNameString = "columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full"
+        products.forEach((item) => {
+          const name = DOMPurify.sanitize(item.fields.name);
+          const description = DOMPurify.sanitize(item.fields.description);
+
+            htmlString += `
+              <div class="bg-white shadow-lg rounded-lg overflow-hidden border-2 border-green-800 transform hover:scale-105 transition-transform duration-300">
+                <div class="p-4 bg-green-700 text-white">
+                  <h3 class="font-bold text-lg mb-2">${name}</h3>
+                  <p class="text-sm">Price: Rp${item.fields.price}</p>
+                  <p class="text-sm">Stock: ${item.fields.stock}</p>
+                </div>
+                <div class="p-4">
+                  <p class="text-gray-700 mb-4">${description}</p>
+                  <div class="flex justify-between items-center">
+                    <a href="/edit-product/${item.pk}" class="bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg py-2 px-4 transition duration-300 shadow-md">Edit</a>
+                    <a href="/delete-product/${item.pk}" class="bg-red-500 hover:bg-red-600 text-white rounded-lg py-2 px-4 transition duration-300 shadow-md">Delete</a>
+                  </div>
+                </div>
+              </div>`;
+        });
+    }
+    document.getElementById("product_cards").className = classNameString;
+    document.getElementById("product_cards").innerHTML = htmlString;
+  }
+
+refreshProducts();
+</script>
 ```
+
 
 
 </details>
