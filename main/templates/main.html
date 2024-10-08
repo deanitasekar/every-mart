@@ -91,12 +91,13 @@
         </div>
       </form>
     </div>
+         
     <!-- Modal footer -->
     <div class="flex justify-end p-6 border-t border-gray-200 rounded-b">
-      <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg mr-2" id="cancelButton">
+      <button type="button" id="cancelButton" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg mr-2">
         Cancel
       </button>
-      <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="btn bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 text-center" onclick="showModal();">
+      <button type="submit" id = "submitProduct" form="productForm" class="btn bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg mr-2">
         Create Product
       </button>
     </div>
@@ -109,7 +110,7 @@
       method: "POST",
       body: new FormData(document.querySelector('#productForm')),
     })
-    .then(response => refreshProducts())
+    .then(response => refreshProducts(), hideModal())
 
     document.getElementById("productForm").reset(); 
     document.querySelector("[data-modal-toggle='crudModal']").click();
