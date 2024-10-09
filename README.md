@@ -17,14 +17,14 @@ Penggunaan JavaScript memiliki beberapa manfaat dalam pengembangan aplikasi web,
 - Manipulasi DOM <br>
   Dengan JavaScript, struktur dari aplikasi web dapat dimodifikasi secara langsung melalui Document Object Model (DOM) sehingga memungkinkan perubahan secara dinamis tanpa perlu reload halaman utama secara keseluruhan
 - Penggunaan framework dan library
-  Ekosistem JavaScript memiliki berbagai framework dan library untuk memudahkan pengembangan aplikasi web yang kompleks, seperti React, Angular, dan Vue.
+  Ekosistem JavaScript memiliki berbagai framework dan library untuk memudahkan pengembangan aplikasi web yang kompleks, seperti React, Angular, dan Vue. <br>
 Referensi: [JavaScript and its Role in Web Development](https://medium.com/@dhanushkumarsuresh/introduction-to-javascript-and-its-role-in-web-development-8d920aa7b553)
 <hr>
 
 
 ### Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
-Fungsi dari penggunaan `awair` ketika menggunakan `fetch()` adalah memastikan bahwa eksekusi kode berikutnya menunggu selesainya proses pengolahan data. `fetch()` merupakan asynchronous method, penggunaan `await` akan menghentikan eksekusi sementara hingga respon dari server diterima sehingga alur eksekusi kode tetap beurutan. 
-Apabila tidak menggunakan `await`, eksekusi kode akan terus berjalan tanpa menunggu proses `fecth()` selesai. Hal ini dapat menyebabkan masalah karena eksekusi kode akan terus berjalan meskipun respin server belum tersedia, yang dapat menyebabkan error seperti "undefined" atau "unresolved promises". Selain itu, tanpa `await`, promises harus ditangani secara manual dan membuat kode menjadi lebih sulit dibaca dan dipahami.
+Fungsi dari penggunaan `await` ketika menggunakan `fetch()` adalah memastikan bahwa eksekusi kode berikutnya menunggu selesainya proses pengolahan data. `fetch()` merupakan asynchronous method, penggunaan `await` akan menghentikan eksekusi sementara hingga respon dari server diterima sehingga alur eksekusi kode tetap berurutan. <br>
+Apabila tidak menggunakan `await`, eksekusi kode akan terus berjalan tanpa menunggu proses `fecth()` selesai. Hal ini dapat menyebabkan masalah karena eksekusi kode akan terus berjalan meskipun respon server belum tersedia, yang dapat menyebabkan error seperti "undefined" atau "unresolved promises". Selain itu, tanpa `await`, promises harus ditangani secara manual dan membuat kode menjadi lebih sulit dibaca dan dipahami. <br>
 Dapat disimpulkan bahwa penggunaan `await` ketika menggunakan `fetch()` memastikan urutan eksekusi kode yang tepat, meningkatkan keterbacaan kode, dan mengurangi risiko bug akibat respon server yang belum tersedia.
 <hr>
 
@@ -36,10 +36,10 @@ Penggunaan decorator `csrf_exempt` memungkinkan `view` menerima request POST tan
 Terdapat beberapa alasan krusial mengapa pembersihan data input pengguna perlu dilakukan di backend juga, tidak hanya frontend, yaitu:
 - Frontend dapat dengan mudah dimanipulasi oleh User sehingga perlu adanya pembersihan data input pengguna di backend untuk keamanan yang lebih kuat
 - Backend memastikan hanya data yang sudah tervalidasi sepenuhnya untuk disimpan dalam database, mencegah penyimpanan data yang berbahaya
-- Backend memiliki efektivotas tinggi dalam mencegah serangan yang kemungkinan besar lolos dari frontend
+- Backend memiliki efektivitas tinggi dalam mencegah serangan yang kemungkinan besar lolos dari frontend
 - Pembersihan data input pengguna di backend memberikan perlindungan terhadap serangan langsung karena penyerang dapat mengirim serangan ke backend secara langsung
 - Pembersihan data input pengguna di backend menjamin bahwa semua data diproses dengan standar keamanan yang sama
-- Pembersihan data input pengguna di frontend memiliki keterbatasan, sedangkan pembersihan data input pengguna di backend dapat menangani berbagai jenis data
+- Pembersihan data input pengguna di frontend memiliki keterbatasan dalam menangani jenis data, sedangkan pembersihan data input pengguna di backend dapat menangani berbagai jenis data
 <hr>
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
