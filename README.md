@@ -17,7 +17,8 @@ Penggunaan JavaScript memiliki beberapa manfaat dalam pengembangan aplikasi web,
 - Manipulasi DOM <br>
   Dengan JavaScript, struktur dari aplikasi web dapat dimodifikasi secara langsung melalui Document Object Model (DOM) sehingga memungkinkan perubahan secara dinamis tanpa perlu reload halaman utama secara keseluruhan
 - Penggunaan framework dan library
-  Ekosistem JavaScript memiliki berbagai framework dan library untuk memudahkan pengembangan aplikasi web yang kompleks, seperti React, Angular, dan Vue. <br>
+  Ekosistem JavaScript memiliki berbagai framework dan library untuk memudahkan pengembangan aplikasi web yang kompleks, seperti React, Angular, dan Vue.
+
 Referensi: [JavaScript and its Role in Web Development](https://medium.com/@dhanushkumarsuresh/introduction-to-javascript-and-its-role-in-web-development-8d920aa7b553)
 <hr>
 
