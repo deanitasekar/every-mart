@@ -19,24 +19,28 @@ Penggunaan JavaScript memiliki beberapa manfaat dalam pengembangan aplikasi web,
 - Penggunaan framework dan library
   Ekosistem JavaScript memiliki berbagai framework dan library untuk memudahkan pengembangan aplikasi web yang kompleks, seperti React, Angular, dan Vue.
 Referensi: [JavaScript and its Role in Web Development](https://medium.com/@dhanushkumarsuresh/introduction-to-javascript-and-its-role-in-web-development-8d920aa7b553)
+<hr>
 
 
 ### Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
 Fungsi dari penggunaan `awair` ketika menggunakan `fetch()` adalah memastikan bahwa eksekusi kode berikutnya menunggu selesainya proses pengolahan data. `fetch()` merupakan asynchronous method, penggunaan `await` akan menghentikan eksekusi sementara hingga respon dari server diterima sehingga alur eksekusi kode tetap beurutan. 
 Apabila tidak menggunakan `await`, eksekusi kode akan terus berjalan tanpa menunggu proses `fecth()` selesai. Hal ini dapat menyebabkan masalah karena eksekusi kode akan terus berjalan meskipun respin server belum tersedia, yang dapat menyebabkan error seperti "undefined" atau "unresolved promises". Selain itu, tanpa `await`, promises harus ditangani secara manual dan membuat kode menjadi lebih sulit dibaca dan dipahami.
 Dapat disimpulkan bahwa penggunaan `await` ketika menggunakan `fetch()` memastikan urutan eksekusi kode yang tepat, meningkatkan keterbacaan kode, dan mengurangi risiko bug akibat respon server yang belum tersedia.
+<hr>
 
 ### Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
-Penggunaan decorator `csrf_exempt` memungkinkan `view` menerima request POST tanpa menyertakan `csrf_token`, yang umumnya diperlukan oleh Django sebagai perlindungan terhadap serangan Cross-Site Request Forgery (CSRF). Decorator `csrf_exempt` biasa digunakan saat menggunakan AJAX, terutama ketika POST request dikirim dari JavaScript, dimana `csrf_token` kerapkali tidak disertakan secara otomatis sehingga request POST tersebut ditolak oleh Django. Oleh karena itu, `csrf_exempt` memungkinkan request POST dari AJAX diterima tanpa adanya validasi `csrf_token`, berguna dalam situasi ketika `csrf_token` tidak tersedia atau sukar untuk disertakan. Namun, penggunaan `csrf_exempt` harus dibatase karena menonaktifkan mekanisme keamanan penting dari Django, berpotensi membuka celah keamanan. 
+Penggunaan decorator `csrf_exempt` memungkinkan `view` menerima request POST tanpa menyertakan `csrf_token`, yang umumnya diperlukan oleh Django sebagai perlindungan terhadap serangan Cross-Site Request Forgery (CSRF). Decorator `csrf_exempt` biasa digunakan saat menggunakan AJAX, terutama ketika POST request dikirim dari JavaScript, dimana `csrf_token` kerapkali tidak disertakan secara otomatis sehingga request POST tersebut ditolak oleh Django. Oleh karena itu, `csrf_exempt` memungkinkan request POST dari AJAX diterima tanpa adanya validasi `csrf_token`, berguna dalam situasi ketika `csrf_token` tidak tersedia atau sukar untuk disertakan. Namun, penggunaan `csrf_exempt` harus dibatase karena menonaktifkan mekanisme keamanan penting dari Django, berpotensi membuka celah keamanan.
+<hr>
 
 ### Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
 Terdapat beberapa alasan krusial mengapa pembersihan data input pengguna perlu dilakukan di backend juga, tidak hanya frontend, yaitu:
 - Frontend dapat dengan mudah dimanipulasi oleh User sehingga perlu adanya pembersihan data input pengguna di backend untuk keamanan yang lebih kuat
-- Pembersihan data input pengguna di backend memberikan perlindungan terhadap serangan langsung karena penyerang dapat mengirim serangan ke backend secara langsung
 - Backend memastikan hanya data yang sudah tervalidasi sepenuhnya untuk disimpan dalam database, mencegah penyimpanan data yang berbahaya
-- Pemberishkan data input pengguna di backend menjamin bahwa semua data diproses dengan standar keamanan yang sama
-- Backend memiliki efektivotas tinggi dalam mencegah serangan yang kemungkinan besar lolos dari drontend
+- Backend memiliki efektivotas tinggi dalam mencegah serangan yang kemungkinan besar lolos dari frontend
+- Pembersihan data input pengguna di backend memberikan perlindungan terhadap serangan langsung karena penyerang dapat mengirim serangan ke backend secara langsung
+- Pembersihan data input pengguna di backend menjamin bahwa semua data diproses dengan standar keamanan yang sama
 - Pembersihan data input pengguna di frontend memiliki keterbatasan, sedangkan pembersihan data input pengguna di backend dapat menangani berbagai jenis data
+<hr>
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
 **Menambahkan error message saat login User**
@@ -93,27 +97,10 @@ urlpatterns = [
     path('add-product-ajax', add_product_ajax, name='add_product_ajax')
 ]
 ```
-- Melakukan modifikasi `main.html` pada `main/templates` dengan mengahpus block conditional `product` dan mengganti dengan `<div id="product_cards"></div>`
+- Melakukan modifikasi `main.html` pada `main/templates` dengan menghapus block conditional `product` dan mengganti dengan `<div id="product_cards"></div>`, serta penambahan Product dengan AJAX
 ```html
 <div id="product_cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 ...
-```
-- Melakukan modifikasi `main.html` pada `main/templates` dengan menambahkan fungsi JavaScript
-```html
-<div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
-  <div id="crudModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
-    <!-- Modal header -->
-    <div class="flex items-center justify-between p-4 border-b rounded-t bg-green-800">
-      <h3 class="text-xl font-semibold text-white">
-        Add Product
-      </h3>
-      <button type="button" class="text-white bg-transparent hover:bg-green-700 hover:text-gray-200 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" id="closeModalBtn">
-        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-        </svg>
-        <span class="sr-only">Close modal</span>
-      </button>
-    </div>
     <!-- Modal body -->
     <div class="px-6 py-4 space-y-6 form-style">
       <form id="productForm" class="space-y-6">
@@ -144,18 +131,9 @@ urlpatterns = [
         </div>
       </form>
     </div>
-         
-    <!-- Modal footer -->
-    <div class="flex justify-end p-6 border-t border-gray-200 rounded-b">
-      <button type="button" id="cancelButton" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg mr-2">
-        Cancel
-      </button>
-      <button type="submit" id = "submitProduct" form="productForm" class="btn bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg mr-2">
-        Create Product
-      </button>
-    </div>
-  </div>
-</div>
+```
+- Melakukan modifikasi `main.html` pada `main/templates` dengan menambahkan fungsi JavaScript
+```html
 <script>
   async function getProduct(){
       return fetch("{% url 'main:show_json' %}").then((res) => res.json())
@@ -207,7 +185,7 @@ urlpatterns = [
 refreshProducts();
 </script>
 ```
-- Melakukan modifikasi pada main.html pada main/templates/ untuk membersihkan data dengan DOMPurify
+- Melakukan modifikasi pada `main.html` pada `main/templates/` untuk membersihkan data dengan DOMPurify
 ```html
 {% block meta %}
 <title>Every Mart</title>
@@ -246,8 +224,18 @@ urlpatterns = [
     path('add-product-ajax', add_product_ajax, name='add_product_ajax')
 ]
 ```
-- Melakukan modifikasi `main.html` pada `main/templates` untuk menambahkan button dan Modal
+- Melakukan modifikasi `main.html` pada `main/templates` untuk menambahkan Button dan Modal Form
 ```html
+  <div class="flex flex-col sm:flex-row justify-end items-center gap-4 mb-6">
+    <a href="{% url 'main:create_product' %}" class="bg-green-800 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+      Add Product
+    </a>
+    <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="bg-green-700 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="showModal();">
+      Add Product by AJAX
+    </button>
+  </div>
+...
+
 <div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
   <div id="crudModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
     <!-- Modal header -->
@@ -305,7 +293,7 @@ urlpatterns = [
   </div>
 </div>
 ```
-- Modifikai `main.html` dalam `main` untuk AJAX POST dan Modal
+- Modifikasi `main.html` dalam `main` dengan menambahkan fungsi JavaScript untuk mengirim data
 ```html
 <script>
       async function getProduct(){
@@ -383,6 +371,10 @@ function hideModal() {
     }, 150); 
 }
 </script>
+```
+- Menampilkan daftar Product dengan `product_cards`
+```html
+<div id="product_cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 ```
 **Github dan PWS**
 - Mengunggah perubahan pada repositori GitHub dan melakukan push ke PWS
